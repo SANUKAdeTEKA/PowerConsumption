@@ -1,0 +1,73 @@
+﻿@{
+    string[] TableHeaders = new string[] { "time", "QI_BL1_1PV", "QI_BL2_1PV", "QI_BL3_1PV", "QI_BL4_1PV", "QI_BLA_1PV", "QI_BL5_1PV", "QI_BL6_1PV", "QI_BL7_1PV", "QI_NTU_1PV", "QI_BP2_1PV", "QI_FUS_1PV", "QI_F2BPV", "QI_MUDPV", "QI_HOTPV", "QI_BP3PV" };
+}
+
+
+    
+    <h2>Uploaded CSV Data</h2>
+
+
+
+
+<section class="intro">
+    <div class="gradient-custom-2 h-100">
+        <div class="mask d-flex align-items-center h-100">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <table id ="myTable"class="table table-dark table-bordered mb-0 table-sm">
+        <thead>
+            <tr>
+            @{
+                foreach(var head in TableHeaders)
+                {
+                    <th>
+                    @head
+                    </th>
+                }
+            }
+            </tr>
+        </thead>
+        <tbody>
+            @{
+
+            if(Model != null)
+            {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.date_time</td>
+                        <td>@item.QI_BL1_1PV</td>
+                        <td>@item.QI_BL2_1PV</td>
+                        <td>@item.QI_BL3_1PV</td>
+                        <td>@item.QI_BL4_1PV</td>
+                        <td>@item.QI_BLA_1PV</td>
+                        <td>@item.QI_BL5_1PV</td>
+                        <td>@item.QI_BL6_1PV</td>
+                        <td>@item.QI_BL7_1PV</td>
+                        <td>@item.QI_NTU_1PV</td>
+                        <td>@item.QI_BP2_1PV</td>
+                        <td>@item.QI_FUS_1PV</td>
+                        <td>@item.QI_F2BPV</td>
+                        <td>@item.QI_MUDPV</td>
+                        <td>@item.QI_HOTPV</td>
+                        <td>@item.QI_BP3PV</td>
+                    </tr>
+                }
+            }
+            }
+        </tbody>
+           
+            
+        </table>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </section>
+    
+
+    <a asp-controller="Home" asp-action="AddCsv" class="btn btn-primary">Upload Another CSV</a>

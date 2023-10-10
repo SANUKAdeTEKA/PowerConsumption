@@ -1,0 +1,10 @@
+﻿@{
+    ViewData["Title"] = "Add Csv Data";
+}
+<h1 align="center">@ViewData["Title"]</h1>
+
+<p align="center">Import the Csv file that you want to add the data from.</p>
+<form align="center" method="post" enctype="multipart/form-data" action="/Home/UploadCsv">
+    <input type="file" name="file">
+    <input type="submit" value="Upload">
+</form>
