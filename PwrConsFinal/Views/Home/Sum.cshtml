@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "Consumption Summary";
+}
+
+
+<div align="center">
+    <h1>Consumption Summary</h1>
+    <select id="choice">
+        <option value="">Select a product</option>
+    </select>
+
+    <label id="lblSum">Sum: </label>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#ddlProducts").change(function () {
+                var productId = $(this).val();
+
+                $.ajax({
+                    url: "Index.aspx",
+                    type: "POST",
+                    data: { productId: productId },
+                    success: function (response) {
+                        $("#lblSum").text(response);
+                    }
+                });
+            });
+        });
+    </script>
+    <!--
+    <form id="form1">
+        <input ID="comboBox"/>
+            <option value="QI_BL1_1PV">QI_BL1_1PV</option>
+            <option value="QI_BL2_1PV">QI_BL2_1PV</option>
+            <option value="QI_BL3_1PV">QI_BL3_1PV</option>
+            <option value="QI_BL4_1PV">QI_BL4_1PV</option>
+            <option value="QI_BLA_1PV">QI_BLA_1PV</option>
+            <option value="QI_BL5_1PV">QI_BL5_1PV</option>
+            <option value="QI_BL6_1PV">QI_BL6_1PV</option>
+            <option value="QI_BL7_1PV">QI_BL7_1PV</option>
+            <option value="QI_NTU_1PV">QI_NTU_1PV</option>
+            <option value="QI_BP2_1PV">QI_BP2_1PV</option>
+            <option value="QI_FUS_1PV">QI_FUS_1PV</option>
+            <option value="QI_F2BPV">QI_F2BPV</option>
+            <option value="QI_MUDPV">QI_MUDPV</option>
+            <option value="QI_HOTPV">QI_HOTPV</option>
+            <option value="QI_BP3PV">QI_BP3PV</option>
+        </input>
+    </form>
+     
+    
+
+</div>
+</br>
+<div class="text-center">
+    <button type="button" onclick="GetSum()">Get Sum</button>
+</div>
+    -->

@@ -3,7 +3,14 @@ using Microsoft.VisualBasic.FileIO;
 using PwrConsFinal.Models;
 using System.Data;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Data.SqlClient;
+using Microsoft.VisualBasic.FileIO;
+using Microsoft.VisualBasic;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using System.Net;
 
 namespace PwrConsFinal.Controllers
 {
@@ -11,9 +18,7 @@ namespace PwrConsFinal.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public HomeController(ILogger<HomeController> logger)
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             _logger = logger;
             con.ConnectionString = "Server=NOTEBOOK-RAJITH\\SQLEXPRESS;Database=PowerConsumption;Trusted_Connection=True;TrustServerCertificate=true";
@@ -28,6 +33,11 @@ namespace PwrConsFinal.Controllers
         {
             return View();
         }
+        public IActionResult Sum()
+        {
+            return View();
+        }
+
         public IActionResult OutputData()
         {
             FetchData();
@@ -59,6 +69,7 @@ namespace PwrConsFinal.Controllers
 
                     DataTable csvData = new DataTable();
                     string[] colFields = csvReader.ReadFields();
+
                     foreach (string column in colFields)
                     {
                         DataColumn datacolumn = new DataColumn(column);
@@ -100,7 +111,7 @@ namespace PwrConsFinal.Controllers
 
         private void InsertDataIntoSQLServerUsingSQLBulkCopy(DataTable csvFileData)
         {
-            string connectionString = "Server=NOTEBOOK-RAJITH\\SQLEXPRESS;Database=PowerConsumption;Trusted_Connection=True";
+            string connectionString = "Server=NOTEBOOK-RAJITH\\SQLEXPRESS;Database=PowerConsumption;Trusted_Connection=True;TrustServerCertificate=true";
 
             using (SqlConnection dbConnection = new SqlConnection(connectionString))
             {
@@ -125,49 +136,87 @@ namespace PwrConsFinal.Controllers
 
         private void FetchData()
         {
-           
-            if (data.Count > 0) { data.Clear(); }
 
+            if (data.Count > 0) { data.Clear(); }
+            else { data.Clear(); }
             try
             {
-                    con.Open();
-                    com.Connection = con;
-                    com.CommandText = "SELECT * from Data";
-                    reader = com.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        DateTime dateValue = (DateTime)reader["time"];
-                        string date_str = dateValue.ToString("dd-MM-yyyy HH:mm:ss");
+                con.Open();
+                com.Connection = con;
+                com.CommandText = "SELECT * from Data";
+                reader = com.ExecuteReader();
+                while (reader.Read())
+                {
+                    DateTime dateValue = (DateTime)reader["time"];
+                    string date_str = dateValue.ToString("dd-MM-yyyy HH:mm:ss");
 
-                        data.Add(new PwrConsData()
-                        {
-                            date_time = date_str,
-                            QI_BL1_1PV = reader["QI_BL1_1PV"].ToString(),
-                            QI_BL2_1PV = reader["QI_BL2_1PV"].ToString(),
-                            QI_BL3_1PV = reader["QI_BL3_1PV"].ToString(),
-                            QI_BL4_1PV = reader["QI_BL4_1PV"].ToString(),
-                            QI_BLA_1PV = reader["QI_BLA_1PV"].ToString(),
-                            QI_BL5_1PV = reader["QI_BL5_1PV"].ToString(),
-                            QI_BL6_1PV = reader["QI_BL6_1PV"].ToString(),
-                            QI_BL7_1PV = reader["QI_BL7_1PV"].ToString(),
-                            QI_NTU_1PV = reader["QI_NTU_1PV"].ToString(),
-                            QI_BP2_1PV = reader["QI_BP2_1PV"].ToString(),
-                            QI_FUS_1PV = reader["QI_FUS_1PV"].ToString(),
-                            QI_F2BPV = reader["QI_F2BPV"].ToString(),
-                            QI_MUDPV = reader["QI_MUDPV"].ToString(),
-                            QI_HOTPV = reader["QI_HOTPV"].ToString(),
-                            QI_BP3PV = reader["QI_BP3PV"].ToString(),
-                        });
-                    }
-                    con.Close();
+                    data.Add(new PwrConsData()
+                    {
+                        date_time = date_str,
+                        QI_BL1_1PV = reader["QI_BL1_1PV"].ToString(),
+                        QI_BL2_1PV = reader["QI_BL2_1PV"].ToString(),
+                        QI_BL3_1PV = reader["QI_BL3_1PV"].ToString(),
+                        QI_BL4_1PV = reader["QI_BL4_1PV"].ToString(),
+                        QI_BLA_1PV = reader["QI_BLA_1PV"].ToString(),
+                        QI_BL5_1PV = reader["QI_BL5_1PV"].ToString(),
+                        QI_BL6_1PV = reader["QI_BL6_1PV"].ToString(),
+                        QI_BL7_1PV = reader["QI_BL7_1PV"].ToString(),
+                        QI_NTU_1PV = reader["QI_NTU_1PV"].ToString(),
+                        QI_BP2_1PV = reader["QI_BP2_1PV"].ToString(),
+                        QI_FUS_1PV = reader["QI_FUS_1PV"].ToString(),
+                        QI_F2BPV = reader["QI_F2BPV"].ToString(),
+                        QI_MUDPV = reader["QI_MUDPV"].ToString(),
+                        QI_HOTPV = reader["QI_HOTPV"].ToString(),
+                        QI_BP3PV = reader["QI_BP3PV"].ToString(),
+                    });
+                }
+                con.Close();
             }
             catch (Exception ex)
             {
+
                 throw ex;
             }
 
 
         }
-          
+
+
     }
+
+    /*
+    public void Page_Load(object sender, EventArgs e)
+    {
+        con.Open();
+
+        string sql = "SELECT id, name FROM my_table";
+        MySqlDataReader reader = com.ExecuteReader();
+
+        while (reader.Read())
+        {
+            choice.Items.Add(new ListItem(reader["name"].ToString(), reader["id"].ToString()));
+        }
+
+        reader.Close();
+        con.Close();
+
+        // Display the sum of the values in the database relevant to the selected product
+        if (ddlProducts.SelectedIndex > 0)
+        {
+            int productId = int.Parse(ddlProducts.SelectedValue);
+
+            string sqlSum = @"SELECT SUM(value)FROM my_tableWHERE id = @productId";
+
+            com = new MySqlCommand(sqlSum, con);
+            com.Parameters.AddWithValue("@productId", productId);
+
+            con.Open();
+            int sum = (int)com.ExecuteScalar();
+            con.Close();
+
+            lblSum.Text = sum.ToString();
+        }
+    }
+    */
+    
 }
