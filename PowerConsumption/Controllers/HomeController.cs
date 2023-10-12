@@ -33,7 +33,7 @@ namespace PwrConsFinal.Controllers
         {
             return View();
         }
-        public IActionResult Sum()
+        public IActionResult ViewAll()
         {
             return View();
         }
@@ -177,46 +177,6 @@ namespace PwrConsFinal.Controllers
 
                 throw ex;
             }
-
-
-        }
-
-
-    }
-
-    /*
-    public void Page_Load(object sender, EventArgs e)
-    {
-        con.Open();
-
-        string sql = "SELECT id, name FROM my_table";
-        MySqlDataReader reader = com.ExecuteReader();
-
-        while (reader.Read())
-        {
-            choice.Items.Add(new ListItem(reader["name"].ToString(), reader["id"].ToString()));
-        }
-
-        reader.Close();
-        con.Close();
-
-        // Display the sum of the values in the database relevant to the selected product
-        if (ddlProducts.SelectedIndex > 0)
-        {
-            int productId = int.Parse(ddlProducts.SelectedValue);
-
-            string sqlSum = @"SELECT SUM(value)FROM my_tableWHERE id = @productId";
-
-            com = new MySqlCommand(sqlSum, con);
-            com.Parameters.AddWithValue("@productId", productId);
-
-            con.Open();
-            int sum = (int)com.ExecuteScalar();
-            con.Close();
-
-            lblSum.Text = sum.ToString();
         }
     }
-    */
-    
 }
