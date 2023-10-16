@@ -4,13 +4,14 @@ using PwrConsFinal.Models;
 using System.Data;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Data.SqlClient;
-using Microsoft.VisualBasic.FileIO;
 using Microsoft.VisualBasic;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using System.Net;
+using PowerConsumption.Models;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace PwrConsFinal.Controllers
 {
@@ -178,5 +179,718 @@ namespace PwrConsFinal.Controllers
                 throw ex;
             }
         }
+
+        private ApplicationDbContext db = new ApplicationDbContext();
+
+        public ActionResult Index2()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CalculateSum(string input)
+        {
+            string connectionString = "Server=NOTEBOOK-RAJITH\\SQLEXPRESS;Database=PowerConsumption;Trusted_Connection=True;TrustServerCertificate=true";
+
+            // Create a dictionary to store the results of multiple queries
+            Dictionary<string, int> results = new Dictionary<string, int>();
+
+            if (!string.IsNullOrEmpty(input))
+            {
+                switch (input)
+                {
+                    case "QI_BL1_1PV":
+
+                        results["Hour01"] = ExecuteQuery("SELECT SUM(QI_BL1_1PV) FROM Data WHERE time >= '2011-04-03 00:00' AND time < '2011-04-03 00:59'");
+                        results["Hour02"] = ExecuteQuery("SELECT SUM(QI_BL1_1PV) FROM Data WHERE time >= '2011-04-03 01:00' AND time < '2011-04-03 01:59'");
+                        results["Hour03"] = ExecuteQuery("SELECT SUM(QI_BL1_1PV) FROM Data WHERE time >= '2011-04-03 02:00' AND time < '2011-04-03 02:59'");
+                        results["Hour04"] = ExecuteQuery("SELECT SUM(QI_BL1_1PV) FROM Data WHERE time >= '2011-04-03 03:00' AND time < '2011-04-03 03:59'");
+                        results["Hour05"] = ExecuteQuery("SELECT SUM(QI_BL1_1PV) FROM Data WHERE time >= '2011-04-03 04:00' AND time < '2011-04-03 04:59'");
+                        results["Hour06"] = ExecuteQuery("SELECT SUM(QI_BL1_1PV) FROM Data WHERE time >= '2011-04-03 05:00' AND time < '2011-04-03 05:59'");
+                        results["Hour07"] = ExecuteQuery("SELECT SUM(QI_BL1_1PV) FROM Data WHERE time >= '2011-04-03 06:00' AND time < '2011-04-03 06:59'");
+                        results["Hour08"] = ExecuteQuery("SELECT SUM(QI_BL1_1PV) FROM Data WHERE time >= '2011-04-03 07:00' AND time < '2011-04-03 07:59'");
+                        results["Hour09"] = ExecuteQuery("SELECT SUM(QI_BL1_1PV) FROM Data WHERE time >= '2011-04-03 08:00' AND time < '2011-04-03 08:59'");
+                        results["Hour10"] = ExecuteQuery("SELECT SUM(QI_BL1_1PV) FROM Data WHERE time >= '2011-04-03 09:00' AND time < '2011-04-03 09:59'");
+                        results["Hour11"] = ExecuteQuery("SELECT SUM(QI_BL1_1PV) FROM Data WHERE time >= '2011-04-03 10:00' AND time < '2011-04-03 10:59'");
+                        results["Hour12"] = ExecuteQuery("SELECT SUM(QI_BL1_1PV) FROM Data WHERE time >= '2011-04-03 11:00' AND time < '2011-04-03 11:59'");
+                        results["Hour13"] = ExecuteQuery("SELECT SUM(QI_BL1_1PV) FROM Data WHERE time >= '2011-04-03 12:00' AND time < '2011-04-03 12:59'");
+                        results["Hour14"] = ExecuteQuery("SELECT SUM(QI_BL1_1PV) FROM Data WHERE time >= '2011-04-03 13:00' AND time < '2011-04-03 13:59'");
+                        results["Hour15"] = ExecuteQuery("SELECT SUM(QI_BL1_1PV) FROM Data WHERE time >= '2011-04-03 14:00' AND time < '2011-04-03 14:59'");
+                        results["Hour16"] = ExecuteQuery("SELECT SUM(QI_BL1_1PV) FROM Data WHERE time >= '2011-04-03 15:00' AND time < '2011-04-03 15:59'");
+                        results["Hour17"] = ExecuteQuery("SELECT SUM(QI_BL1_1PV) FROM Data WHERE time >= '2011-04-03 16:00' AND time < '2011-04-03 16:59'");
+                        results["Hour18"] = ExecuteQuery("SELECT SUM(QI_BL1_1PV) FROM Data WHERE time >= '2011-04-03 17:00' AND time < '2011-04-03 17:59'");
+                        results["Hour19"] = ExecuteQuery("SELECT SUM(QI_BL1_1PV) FROM Data WHERE time >= '2011-04-03 18:00' AND time < '2011-04-03 18:59'");
+                        results["Hour20"] = ExecuteQuery("SELECT SUM(QI_BL1_1PV) FROM Data WHERE time >= '2011-04-03 19:00' AND time < '2011-04-03 19:59'");
+                        results["Hour21"] = ExecuteQuery("SELECT SUM(QI_BL1_1PV) FROM Data WHERE time >= '2011-04-03 20:00' AND time < '2011-04-03 20:59'");
+                        results["Hour22"] = ExecuteQuery("SELECT SUM(QI_BL1_1PV) FROM Data WHERE time >= '2011-04-03 21:00' AND time < '2011-04-03 21:59'");
+                        results["Hour23"] = ExecuteQuery("SELECT SUM(QI_BL1_1PV) FROM Data WHERE time >= '2011-04-03 22:00' AND time < '2011-04-03 22:59'");
+                        results["Hour24"] = ExecuteQuery("SELECT SUM(QI_BL1_1PV) FROM Data WHERE time >= '2011-04-03 23:00' AND time < '2011-04-03 23:59'");
+                        results["Total"] = ExecuteQuery("SELECT SUM(QI_BL1_1PV) FROM Data WHERE time >= '2011-04-03 00:00' AND time < '2011-04-04 00:00'");
+
+                        break;
+
+                    case "QI_BL2_1PV":
+
+                        results["Hour01"] = ExecuteQuery("SELECT SUM(QI_BL2_1PV) FROM Data WHERE time >= '2011-04-03 00:00' AND time < '2011-04-03 00:59'");
+                        results["Hour02"] = ExecuteQuery("SELECT SUM(QI_BL2_1PV) FROM Data WHERE time >= '2011-04-03 01:00' AND time < '2011-04-03 01:59'");
+                        results["Hour03"] = ExecuteQuery("SELECT SUM(QI_BL2_1PV) FROM Data WHERE time >= '2011-04-03 02:00' AND time < '2011-04-03 02:59'");
+                        results["Hour04"] = ExecuteQuery("SELECT SUM(QI_BL2_1PV) FROM Data WHERE time >= '2011-04-03 03:00' AND time < '2011-04-03 03:59'");
+                        results["Hour05"] = ExecuteQuery("SELECT SUM(QI_BL2_1PV) FROM Data WHERE time >= '2011-04-03 04:00' AND time < '2011-04-03 04:59'");
+                        results["Hour06"] = ExecuteQuery("SELECT SUM(QI_BL2_1PV) FROM Data WHERE time >= '2011-04-03 05:00' AND time < '2011-04-03 05:59'");
+                        results["Hour07"] = ExecuteQuery("SELECT SUM(QI_BL2_1PV) FROM Data WHERE time >= '2011-04-03 06:00' AND time < '2011-04-03 06:59'");
+                        results["Hour08"] = ExecuteQuery("SELECT SUM(QI_BL2_1PV) FROM Data WHERE time >= '2011-04-03 07:00' AND time < '2011-04-03 07:59'");
+                        results["Hour09"] = ExecuteQuery("SELECT SUM(QI_BL2_1PV) FROM Data WHERE time >= '2011-04-03 08:00' AND time < '2011-04-03 08:59'");
+                        results["Hour10"] = ExecuteQuery("SELECT SUM(QI_BL2_1PV) FROM Data WHERE time >= '2011-04-03 09:00' AND time < '2011-04-03 09:59'");
+                        results["Hour11"] = ExecuteQuery("SELECT SUM(QI_BL2_1PV) FROM Data WHERE time >= '2011-04-03 10:00' AND time < '2011-04-03 10:59'");
+                        results["Hour12"] = ExecuteQuery("SELECT SUM(QI_BL2_1PV) FROM Data WHERE time >= '2011-04-03 11:00' AND time < '2011-04-03 11:59'");
+                        results["Hour13"] = ExecuteQuery("SELECT SUM(QI_BL2_1PV) FROM Data WHERE time >= '2011-04-03 12:00' AND time < '2011-04-03 12:59'");
+                        results["Hour14"] = ExecuteQuery("SELECT SUM(QI_BL2_1PV) FROM Data WHERE time >= '2011-04-03 13:00' AND time < '2011-04-03 13:59'");
+                        results["Hour15"] = ExecuteQuery("SELECT SUM(QI_BL2_1PV) FROM Data WHERE time >= '2011-04-03 14:00' AND time < '2011-04-03 14:59'");
+                        results["Hour16"] = ExecuteQuery("SELECT SUM(QI_BL2_1PV) FROM Data WHERE time >= '2011-04-03 15:00' AND time < '2011-04-03 15:59'");
+                        results["Hour17"] = ExecuteQuery("SELECT SUM(QI_BL2_1PV) FROM Data WHERE time >= '2011-04-03 16:00' AND time < '2011-04-03 16:59'");
+                        results["Hour18"] = ExecuteQuery("SELECT SUM(QI_BL2_1PV) FROM Data WHERE time >= '2011-04-03 17:00' AND time < '2011-04-03 17:59'");
+                        results["Hour19"] = ExecuteQuery("SELECT SUM(QI_BL2_1PV) FROM Data WHERE time >= '2011-04-03 18:00' AND time < '2011-04-03 18:59'");
+                        results["Hour20"] = ExecuteQuery("SELECT SUM(QI_BL2_1PV) FROM Data WHERE time >= '2011-04-03 19:00' AND time < '2011-04-03 19:59'");
+                        results["Hour21"] = ExecuteQuery("SELECT SUM(QI_BL2_1PV) FROM Data WHERE time >= '2011-04-03 20:00' AND time < '2011-04-03 20:59'");
+                        results["Hour22"] = ExecuteQuery("SELECT SUM(QI_BL2_1PV) FROM Data WHERE time >= '2011-04-03 21:00' AND time < '2011-04-03 21:59'");
+                        results["Hour23"] = ExecuteQuery("SELECT SUM(QI_BL2_1PV) FROM Data WHERE time >= '2011-04-03 22:00' AND time < '2011-04-03 22:59'");
+                        results["Hour24"] = ExecuteQuery("SELECT SUM(QI_BL2_1PV) FROM Data WHERE time >= '2011-04-03 23:00' AND time < '2011-04-03 23:59'");
+                        results["Total"] = ExecuteQuery("SELECT SUM(QI_BL2_1PV) FROM Data WHERE time >= '2011-04-03 00:00' AND time < '2011-04-04 00:00'");
+
+                        break;
+
+                    case "QI_BL3_1PV":
+
+                        results["Hour01"] = ExecuteQuery("SELECT SUM(QI_BL3_1PV) FROM Data WHERE time >= '2011-04-03 00:00' AND time < '2011-04-03 00:59'");
+                        results["Hour02"] = ExecuteQuery("SELECT SUM(QI_BL3_1PV) FROM Data WHERE time >= '2011-04-03 01:00' AND time < '2011-04-03 01:59'");
+                        results["Hour03"] = ExecuteQuery("SELECT SUM(QI_BL3_1PV) FROM Data WHERE time >= '2011-04-03 02:00' AND time < '2011-04-03 02:59'");
+                        results["Hour04"] = ExecuteQuery("SELECT SUM(QI_BL3_1PV) FROM Data WHERE time >= '2011-04-03 03:00' AND time < '2011-04-03 03:59'");
+                        results["Hour05"] = ExecuteQuery("SELECT SUM(QI_BL3_1PV) FROM Data WHERE time >= '2011-04-03 04:00' AND time < '2011-04-03 04:59'");
+                        results["Hour06"] = ExecuteQuery("SELECT SUM(QI_BL3_1PV) FROM Data WHERE time >= '2011-04-03 05:00' AND time < '2011-04-03 05:59'");
+                        results["Hour07"] = ExecuteQuery("SELECT SUM(QI_BL3_1PV) FROM Data WHERE time >= '2011-04-03 06:00' AND time < '2011-04-03 06:59'");
+                        results["Hour08"] = ExecuteQuery("SELECT SUM(QI_BL3_1PV) FROM Data WHERE time >= '2011-04-03 07:00' AND time < '2011-04-03 07:59'");
+                        results["Hour09"] = ExecuteQuery("SELECT SUM(QI_BL3_1PV) FROM Data WHERE time >= '2011-04-03 08:00' AND time < '2011-04-03 08:59'");
+                        results["Hour10"] = ExecuteQuery("SELECT SUM(QI_BL3_1PV) FROM Data WHERE time >= '2011-04-03 09:00' AND time < '2011-04-03 09:59'");
+                        results["Hour11"] = ExecuteQuery("SELECT SUM(QI_BL3_1PV) FROM Data WHERE time >= '2011-04-03 10:00' AND time < '2011-04-03 10:59'");
+                        results["Hour12"] = ExecuteQuery("SELECT SUM(QI_BL3_1PV) FROM Data WHERE time >= '2011-04-03 11:00' AND time < '2011-04-03 11:59'");
+                        results["Hour13"] = ExecuteQuery("SELECT SUM(QI_BL3_1PV) FROM Data WHERE time >= '2011-04-03 12:00' AND time < '2011-04-03 12:59'");
+                        results["Hour14"] = ExecuteQuery("SELECT SUM(QI_BL3_1PV) FROM Data WHERE time >= '2011-04-03 13:00' AND time < '2011-04-03 13:59'");
+                        results["Hour15"] = ExecuteQuery("SELECT SUM(QI_BL3_1PV) FROM Data WHERE time >= '2011-04-03 14:00' AND time < '2011-04-03 14:59'");
+                        results["Hour16"] = ExecuteQuery("SELECT SUM(QI_BL3_1PV) FROM Data WHERE time >= '2011-04-03 15:00' AND time < '2011-04-03 15:59'");
+                        results["Hour17"] = ExecuteQuery("SELECT SUM(QI_BL3_1PV) FROM Data WHERE time >= '2011-04-03 16:00' AND time < '2011-04-03 16:59'");
+                        results["Hour18"] = ExecuteQuery("SELECT SUM(QI_BL3_1PV) FROM Data WHERE time >= '2011-04-03 17:00' AND time < '2011-04-03 17:59'");
+                        results["Hour19"] = ExecuteQuery("SELECT SUM(QI_BL3_1PV) FROM Data WHERE time >= '2011-04-03 18:00' AND time < '2011-04-03 18:59'");
+                        results["Hour20"] = ExecuteQuery("SELECT SUM(QI_BL3_1PV) FROM Data WHERE time >= '2011-04-03 19:00' AND time < '2011-04-03 19:59'");
+                        results["Hour21"] = ExecuteQuery("SELECT SUM(QI_BL3_1PV) FROM Data WHERE time >= '2011-04-03 20:00' AND time < '2011-04-03 20:59'");
+                        results["Hour22"] = ExecuteQuery("SELECT SUM(QI_BL3_1PV) FROM Data WHERE time >= '2011-04-03 21:00' AND time < '2011-04-03 21:59'");
+                        results["Hour23"] = ExecuteQuery("SELECT SUM(QI_BL3_1PV) FROM Data WHERE time >= '2011-04-03 22:00' AND time < '2011-04-03 22:59'");
+                        results["Hour24"] = ExecuteQuery("SELECT SUM(QI_BL3_1PV) FROM Data WHERE time >= '2011-04-03 23:00' AND time < '2011-04-03 23:59'");
+                        results["Total"] = ExecuteQuery("SELECT SUM(QI_BL3_1PV) FROM Data WHERE time >= '2011-04-03 00:00' AND time < '2011-04-04 00:00'");
+
+                        break;
+
+                    case "QI_BL4_1PV":
+
+                        results["Hour01"] = ExecuteQuery("SELECT SUM(QI_BL4_1PV) FROM Data WHERE time >= '2011-04-03 00:00' AND time < '2011-04-03 00:59'");
+                        results["Hour02"] = ExecuteQuery("SELECT SUM(QI_BL4_1PV) FROM Data WHERE time >= '2011-04-03 01:00' AND time < '2011-04-03 01:59'");
+                        results["Hour03"] = ExecuteQuery("SELECT SUM(QI_BL4_1PV) FROM Data WHERE time >= '2011-04-03 02:00' AND time < '2011-04-03 02:59'");
+                        results["Hour04"] = ExecuteQuery("SELECT SUM(QI_BL4_1PV) FROM Data WHERE time >= '2011-04-03 03:00' AND time < '2011-04-03 03:59'");
+                        results["Hour05"] = ExecuteQuery("SELECT SUM(QI_BL4_1PV) FROM Data WHERE time >= '2011-04-03 04:00' AND time < '2011-04-03 04:59'");
+                        results["Hour06"] = ExecuteQuery("SELECT SUM(QI_BL4_1PV) FROM Data WHERE time >= '2011-04-03 05:00' AND time < '2011-04-03 05:59'");
+                        results["Hour07"] = ExecuteQuery("SELECT SUM(QI_BL4_1PV) FROM Data WHERE time >= '2011-04-03 06:00' AND time < '2011-04-03 06:59'");
+                        results["Hour08"] = ExecuteQuery("SELECT SUM(QI_BL4_1PV) FROM Data WHERE time >= '2011-04-03 07:00' AND time < '2011-04-03 07:59'");
+                        results["Hour09"] = ExecuteQuery("SELECT SUM(QI_BL4_1PV) FROM Data WHERE time >= '2011-04-03 08:00' AND time < '2011-04-03 08:59'");
+                        results["Hour10"] = ExecuteQuery("SELECT SUM(QI_BL4_1PV) FROM Data WHERE time >= '2011-04-03 09:00' AND time < '2011-04-03 09:59'");
+                        results["Hour11"] = ExecuteQuery("SELECT SUM(QI_BL4_1PV) FROM Data WHERE time >= '2011-04-03 10:00' AND time < '2011-04-03 10:59'");
+                        results["Hour12"] = ExecuteQuery("SELECT SUM(QI_BL4_1PV) FROM Data WHERE time >= '2011-04-03 11:00' AND time < '2011-04-03 11:59'");
+                        results["Hour13"] = ExecuteQuery("SELECT SUM(QI_BL4_1PV) FROM Data WHERE time >= '2011-04-03 12:00' AND time < '2011-04-03 12:59'");
+                        results["Hour14"] = ExecuteQuery("SELECT SUM(QI_BL4_1PV) FROM Data WHERE time >= '2011-04-03 13:00' AND time < '2011-04-03 13:59'");
+                        results["Hour15"] = ExecuteQuery("SELECT SUM(QI_BL4_1PV) FROM Data WHERE time >= '2011-04-03 14:00' AND time < '2011-04-03 14:59'");
+                        results["Hour16"] = ExecuteQuery("SELECT SUM(QI_BL4_1PV) FROM Data WHERE time >= '2011-04-03 15:00' AND time < '2011-04-03 15:59'");
+                        results["Hour17"] = ExecuteQuery("SELECT SUM(QI_BL4_1PV) FROM Data WHERE time >= '2011-04-03 16:00' AND time < '2011-04-03 16:59'");
+                        results["Hour18"] = ExecuteQuery("SELECT SUM(QI_BL4_1PV) FROM Data WHERE time >= '2011-04-03 17:00' AND time < '2011-04-03 17:59'");
+                        results["Hour19"] = ExecuteQuery("SELECT SUM(QI_BL4_1PV) FROM Data WHERE time >= '2011-04-03 18:00' AND time < '2011-04-03 18:59'");
+                        results["Hour20"] = ExecuteQuery("SELECT SUM(QI_BL4_1PV) FROM Data WHERE time >= '2011-04-03 19:00' AND time < '2011-04-03 19:59'");
+                        results["Hour21"] = ExecuteQuery("SELECT SUM(QI_BL4_1PV) FROM Data WHERE time >= '2011-04-03 20:00' AND time < '2011-04-03 20:59'");
+                        results["Hour22"] = ExecuteQuery("SELECT SUM(QI_BL4_1PV) FROM Data WHERE time >= '2011-04-03 21:00' AND time < '2011-04-03 21:59'");
+                        results["Hour23"] = ExecuteQuery("SELECT SUM(QI_BL4_1PV) FROM Data WHERE time >= '2011-04-03 22:00' AND time < '2011-04-03 22:59'");
+                        results["Hour24"] = ExecuteQuery("SELECT SUM(QI_BL4_1PV) FROM Data WHERE time >= '2011-04-03 23:00' AND time < '2011-04-03 23:59'");
+                        results["Total"] = ExecuteQuery("SELECT SUM(QI_BL4_1PV) FROM Data WHERE time >= '2011-04-03 00:00' AND time < '2011-04-04 00:00'");
+
+                        break;
+
+                    case "QI_BLA_1PV":
+
+                        results["Hour01"] = ExecuteQuery("SELECT SUM(QI_BLA_1PV) FROM Data WHERE time >= '2011-04-03 00:00' AND time < '2011-04-03 00:59'");
+                        results["Hour02"] = ExecuteQuery("SELECT SUM(QI_BLA_1PV) FROM Data WHERE time >= '2011-04-03 01:00' AND time < '2011-04-03 01:59'");
+                        results["Hour03"] = ExecuteQuery("SELECT SUM(QI_BLA_1PV) FROM Data WHERE time >= '2011-04-03 02:00' AND time < '2011-04-03 02:59'");
+                        results["Hour04"] = ExecuteQuery("SELECT SUM(QI_BLA_1PV) FROM Data WHERE time >= '2011-04-03 03:00' AND time < '2011-04-03 03:59'");
+                        results["Hour05"] = ExecuteQuery("SELECT SUM(QI_BLA_1PV) FROM Data WHERE time >= '2011-04-03 04:00' AND time < '2011-04-03 04:59'");
+                        results["Hour06"] = ExecuteQuery("SELECT SUM(QI_BLA_1PV) FROM Data WHERE time >= '2011-04-03 05:00' AND time < '2011-04-03 05:59'");
+                        results["Hour07"] = ExecuteQuery("SELECT SUM(QI_BLA_1PV) FROM Data WHERE time >= '2011-04-03 06:00' AND time < '2011-04-03 06:59'");
+                        results["Hour08"] = ExecuteQuery("SELECT SUM(QI_BLA_1PV) FROM Data WHERE time >= '2011-04-03 07:00' AND time < '2011-04-03 07:59'");
+                        results["Hour09"] = ExecuteQuery("SELECT SUM(QI_BLA_1PV) FROM Data WHERE time >= '2011-04-03 08:00' AND time < '2011-04-03 08:59'");
+                        results["Hour10"] = ExecuteQuery("SELECT SUM(QI_BLA_1PV) FROM Data WHERE time >= '2011-04-03 09:00' AND time < '2011-04-03 09:59'");
+                        results["Hour11"] = ExecuteQuery("SELECT SUM(QI_BLA_1PV) FROM Data WHERE time >= '2011-04-03 10:00' AND time < '2011-04-03 10:59'");
+                        results["Hour12"] = ExecuteQuery("SELECT SUM(QI_BLA_1PV) FROM Data WHERE time >= '2011-04-03 11:00' AND time < '2011-04-03 11:59'");
+                        results["Hour13"] = ExecuteQuery("SELECT SUM(QI_BLA_1PV) FROM Data WHERE time >= '2011-04-03 12:00' AND time < '2011-04-03 12:59'");
+                        results["Hour14"] = ExecuteQuery("SELECT SUM(QI_BLA_1PV) FROM Data WHERE time >= '2011-04-03 13:00' AND time < '2011-04-03 13:59'");
+                        results["Hour15"] = ExecuteQuery("SELECT SUM(QI_BLA_1PV) FROM Data WHERE time >= '2011-04-03 14:00' AND time < '2011-04-03 14:59'");
+                        results["Hour16"] = ExecuteQuery("SELECT SUM(QI_BLA_1PV) FROM Data WHERE time >= '2011-04-03 15:00' AND time < '2011-04-03 15:59'");
+                        results["Hour17"] = ExecuteQuery("SELECT SUM(QI_BLA_1PV) FROM Data WHERE time >= '2011-04-03 16:00' AND time < '2011-04-03 16:59'");
+                        results["Hour18"] = ExecuteQuery("SELECT SUM(QI_BLA_1PV) FROM Data WHERE time >= '2011-04-03 17:00' AND time < '2011-04-03 17:59'");
+                        results["Hour19"] = ExecuteQuery("SELECT SUM(QI_BLA_1PV) FROM Data WHERE time >= '2011-04-03 18:00' AND time < '2011-04-03 18:59'");
+                        results["Hour20"] = ExecuteQuery("SELECT SUM(QI_BLA_1PV) FROM Data WHERE time >= '2011-04-03 19:00' AND time < '2011-04-03 19:59'");
+                        results["Hour21"] = ExecuteQuery("SELECT SUM(QI_BLA_1PV) FROM Data WHERE time >= '2011-04-03 20:00' AND time < '2011-04-03 20:59'");
+                        results["Hour22"] = ExecuteQuery("SELECT SUM(QI_BLA_1PV) FROM Data WHERE time >= '2011-04-03 21:00' AND time < '2011-04-03 21:59'");
+                        results["Hour23"] = ExecuteQuery("SELECT SUM(QI_BLA_1PV) FROM Data WHERE time >= '2011-04-03 22:00' AND time < '2011-04-03 22:59'");
+                        results["Hour24"] = ExecuteQuery("SELECT SUM(QI_BLA_1PV) FROM Data WHERE time >= '2011-04-03 23:00' AND time < '2011-04-03 23:59'");
+                        results["Total"] = ExecuteQuery("SELECT SUM(QI_BLA_1PV) FROM Data WHERE time >= '2011-04-03 00:00' AND time < '2011-04-04 00:00'");
+
+                        break;
+
+                    case "QI_BL5_1PV":
+
+                        results["Hour01"] = ExecuteQuery("SELECT SUM(QI_BL5_1PV) FROM Data WHERE time >= '2011-04-03 00:00' AND time < '2011-04-03 00:59'");
+                        results["Hour02"] = ExecuteQuery("SELECT SUM(QI_BL5_1PV) FROM Data WHERE time >= '2011-04-03 01:00' AND time < '2011-04-03 01:59'");
+                        results["Hour03"] = ExecuteQuery("SELECT SUM(QI_BL5_1PV) FROM Data WHERE time >= '2011-04-03 02:00' AND time < '2011-04-03 02:59'");
+                        results["Hour04"] = ExecuteQuery("SELECT SUM(QI_BL5_1PV) FROM Data WHERE time >= '2011-04-03 03:00' AND time < '2011-04-03 03:59'");
+                        results["Hour05"] = ExecuteQuery("SELECT SUM(QI_BL5_1PV) FROM Data WHERE time >= '2011-04-03 04:00' AND time < '2011-04-03 04:59'");
+                        results["Hour06"] = ExecuteQuery("SELECT SUM(QI_BL5_1PV) FROM Data WHERE time >= '2011-04-03 05:00' AND time < '2011-04-03 05:59'");
+                        results["Hour07"] = ExecuteQuery("SELECT SUM(QI_BL5_1PV) FROM Data WHERE time >= '2011-04-03 06:00' AND time < '2011-04-03 06:59'");
+                        results["Hour08"] = ExecuteQuery("SELECT SUM(QI_BL5_1PV) FROM Data WHERE time >= '2011-04-03 07:00' AND time < '2011-04-03 07:59'");
+                        results["Hour09"] = ExecuteQuery("SELECT SUM(QI_BL5_1PV) FROM Data WHERE time >= '2011-04-03 08:00' AND time < '2011-04-03 08:59'");
+                        results["Hour10"] = ExecuteQuery("SELECT SUM(QI_BL5_1PV) FROM Data WHERE time >= '2011-04-03 09:00' AND time < '2011-04-03 09:59'");
+                        results["Hour11"] = ExecuteQuery("SELECT SUM(QI_BL5_1PV) FROM Data WHERE time >= '2011-04-03 10:00' AND time < '2011-04-03 10:59'");
+                        results["Hour12"] = ExecuteQuery("SELECT SUM(QI_BL5_1PV) FROM Data WHERE time >= '2011-04-03 11:00' AND time < '2011-04-03 11:59'");
+                        results["Hour13"] = ExecuteQuery("SELECT SUM(QI_BL5_1PV) FROM Data WHERE time >= '2011-04-03 12:00' AND time < '2011-04-03 12:59'");
+                        results["Hour14"] = ExecuteQuery("SELECT SUM(QI_BL5_1PV) FROM Data WHERE time >= '2011-04-03 13:00' AND time < '2011-04-03 13:59'");
+                        results["Hour15"] = ExecuteQuery("SELECT SUM(QI_BL5_1PV) FROM Data WHERE time >= '2011-04-03 14:00' AND time < '2011-04-03 14:59'");
+                        results["Hour16"] = ExecuteQuery("SELECT SUM(QI_BL5_1PV) FROM Data WHERE time >= '2011-04-03 15:00' AND time < '2011-04-03 15:59'");
+                        results["Hour17"] = ExecuteQuery("SELECT SUM(QI_BL5_1PV) FROM Data WHERE time >= '2011-04-03 16:00' AND time < '2011-04-03 16:59'");
+                        results["Hour18"] = ExecuteQuery("SELECT SUM(QI_BL5_1PV) FROM Data WHERE time >= '2011-04-03 17:00' AND time < '2011-04-03 17:59'");
+                        results["Hour19"] = ExecuteQuery("SELECT SUM(QI_BL5_1PV) FROM Data WHERE time >= '2011-04-03 18:00' AND time < '2011-04-03 18:59'");
+                        results["Hour20"] = ExecuteQuery("SELECT SUM(QI_BL5_1PV) FROM Data WHERE time >= '2011-04-03 19:00' AND time < '2011-04-03 19:59'");
+                        results["Hour21"] = ExecuteQuery("SELECT SUM(QI_BL5_1PV) FROM Data WHERE time >= '2011-04-03 20:00' AND time < '2011-04-03 20:59'");
+                        results["Hour22"] = ExecuteQuery("SELECT SUM(QI_BL5_1PV) FROM Data WHERE time >= '2011-04-03 21:00' AND time < '2011-04-03 21:59'");
+                        results["Hour23"] = ExecuteQuery("SELECT SUM(QI_BL5_1PV) FROM Data WHERE time >= '2011-04-03 22:00' AND time < '2011-04-03 22:59'");
+                        results["Hour24"] = ExecuteQuery("SELECT SUM(QI_BL5_1PV) FROM Data WHERE time >= '2011-04-03 23:00' AND time < '2011-04-03 23:59'");
+                        results["Total"] = ExecuteQuery("SELECT SUM(QI_BL5_1PV) FROM Data WHERE time >= '2011-04-03 00:00' AND time < '2011-04-04 00:00'");
+
+                        break;
+
+                    case "QI_BL6_1PV":
+
+                        results["Hour01"] = ExecuteQuery("SELECT SUM(QI_BL6_1PV) FROM Data WHERE time >= '2011-04-03 00:00' AND time < '2011-04-03 00:59'");
+                        results["Hour02"] = ExecuteQuery("SELECT SUM(QI_BL6_1PV) FROM Data WHERE time >= '2011-04-03 01:00' AND time < '2011-04-03 01:59'");
+                        results["Hour03"] = ExecuteQuery("SELECT SUM(QI_BL6_1PV) FROM Data WHERE time >= '2011-04-03 02:00' AND time < '2011-04-03 02:59'");
+                        results["Hour04"] = ExecuteQuery("SELECT SUM(QI_BL6_1PV) FROM Data WHERE time >= '2011-04-03 03:00' AND time < '2011-04-03 03:59'");
+                        results["Hour05"] = ExecuteQuery("SELECT SUM(QI_BL6_1PV) FROM Data WHERE time >= '2011-04-03 04:00' AND time < '2011-04-03 04:59'");
+                        results["Hour06"] = ExecuteQuery("SELECT SUM(QI_BL6_1PV) FROM Data WHERE time >= '2011-04-03 05:00' AND time < '2011-04-03 05:59'");
+                        results["Hour07"] = ExecuteQuery("SELECT SUM(QI_BL6_1PV) FROM Data WHERE time >= '2011-04-03 06:00' AND time < '2011-04-03 06:59'");
+                        results["Hour08"] = ExecuteQuery("SELECT SUM(QI_BL6_1PV) FROM Data WHERE time >= '2011-04-03 07:00' AND time < '2011-04-03 07:59'");
+                        results["Hour09"] = ExecuteQuery("SELECT SUM(QI_BL6_1PV) FROM Data WHERE time >= '2011-04-03 08:00' AND time < '2011-04-03 08:59'");
+                        results["Hour10"] = ExecuteQuery("SELECT SUM(QI_BL6_1PV) FROM Data WHERE time >= '2011-04-03 09:00' AND time < '2011-04-03 09:59'");
+                        results["Hour11"] = ExecuteQuery("SELECT SUM(QI_BL6_1PV) FROM Data WHERE time >= '2011-04-03 10:00' AND time < '2011-04-03 10:59'");
+                        results["Hour12"] = ExecuteQuery("SELECT SUM(QI_BL6_1PV) FROM Data WHERE time >= '2011-04-03 11:00' AND time < '2011-04-03 11:59'");
+                        results["Hour13"] = ExecuteQuery("SELECT SUM(QI_BL6_1PV) FROM Data WHERE time >= '2011-04-03 12:00' AND time < '2011-04-03 12:59'");
+                        results["Hour14"] = ExecuteQuery("SELECT SUM(QI_BL6_1PV) FROM Data WHERE time >= '2011-04-03 13:00' AND time < '2011-04-03 13:59'");
+                        results["Hour15"] = ExecuteQuery("SELECT SUM(QI_BL6_1PV) FROM Data WHERE time >= '2011-04-03 14:00' AND time < '2011-04-03 14:59'");
+                        results["Hour16"] = ExecuteQuery("SELECT SUM(QI_BL6_1PV) FROM Data WHERE time >= '2011-04-03 15:00' AND time < '2011-04-03 15:59'");
+                        results["Hour17"] = ExecuteQuery("SELECT SUM(QI_BL6_1PV) FROM Data WHERE time >= '2011-04-03 16:00' AND time < '2011-04-03 16:59'");
+                        results["Hour18"] = ExecuteQuery("SELECT SUM(QI_BL6_1PV) FROM Data WHERE time >= '2011-04-03 17:00' AND time < '2011-04-03 17:59'");
+                        results["Hour19"] = ExecuteQuery("SELECT SUM(QI_BL6_1PV) FROM Data WHERE time >= '2011-04-03 18:00' AND time < '2011-04-03 18:59'");
+                        results["Hour20"] = ExecuteQuery("SELECT SUM(QI_BL6_1PV) FROM Data WHERE time >= '2011-04-03 19:00' AND time < '2011-04-03 19:59'");
+                        results["Hour21"] = ExecuteQuery("SELECT SUM(QI_BL6_1PV) FROM Data WHERE time >= '2011-04-03 20:00' AND time < '2011-04-03 20:59'");
+                        results["Hour22"] = ExecuteQuery("SELECT SUM(QI_BL6_1PV) FROM Data WHERE time >= '2011-04-03 21:00' AND time < '2011-04-03 21:59'");
+                        results["Hour23"] = ExecuteQuery("SELECT SUM(QI_BL6_1PV) FROM Data WHERE time >= '2011-04-03 22:00' AND time < '2011-04-03 22:59'");
+                        results["Hour24"] = ExecuteQuery("SELECT SUM(QI_BL6_1PV) FROM Data WHERE time >= '2011-04-03 23:00' AND time < '2011-04-03 23:59'");
+                        results["Total"] = ExecuteQuery("SELECT SUM(QI_BL6_1PV) FROM Data WHERE time >= '2011-04-03 00:00' AND time < '2011-04-04 00:00'");
+
+                        break;
+
+                    case "QI_BL7_1PV":
+
+                        results["Hour01"] = ExecuteQuery("SELECT SUM(QI_BL7_1PV) FROM Data WHERE time >= '2011-04-03 00:00' AND time < '2011-04-03 00:59'");
+                        results["Hour02"] = ExecuteQuery("SELECT SUM(QI_BL7_1PV) FROM Data WHERE time >= '2011-04-03 01:00' AND time < '2011-04-03 01:59'");
+                        results["Hour03"] = ExecuteQuery("SELECT SUM(QI_BL7_1PV) FROM Data WHERE time >= '2011-04-03 02:00' AND time < '2011-04-03 02:59'");
+                        results["Hour04"] = ExecuteQuery("SELECT SUM(QI_BL7_1PV) FROM Data WHERE time >= '2011-04-03 03:00' AND time < '2011-04-03 03:59'");
+                        results["Hour05"] = ExecuteQuery("SELECT SUM(QI_BL7_1PV) FROM Data WHERE time >= '2011-04-03 04:00' AND time < '2011-04-03 04:59'");
+                        results["Hour06"] = ExecuteQuery("SELECT SUM(QI_BL7_1PV) FROM Data WHERE time >= '2011-04-03 05:00' AND time < '2011-04-03 05:59'");
+                        results["Hour07"] = ExecuteQuery("SELECT SUM(QI_BL7_1PV) FROM Data WHERE time >= '2011-04-03 06:00' AND time < '2011-04-03 06:59'");
+                        results["Hour08"] = ExecuteQuery("SELECT SUM(QI_BL7_1PV) FROM Data WHERE time >= '2011-04-03 07:00' AND time < '2011-04-03 07:59'");
+                        results["Hour09"] = ExecuteQuery("SELECT SUM(QI_BL7_1PV) FROM Data WHERE time >= '2011-04-03 08:00' AND time < '2011-04-03 08:59'");
+                        results["Hour10"] = ExecuteQuery("SELECT SUM(QI_BL7_1PV) FROM Data WHERE time >= '2011-04-03 09:00' AND time < '2011-04-03 09:59'");
+                        results["Hour11"] = ExecuteQuery("SELECT SUM(QI_BL7_1PV) FROM Data WHERE time >= '2011-04-03 10:00' AND time < '2011-04-03 10:59'");
+                        results["Hour12"] = ExecuteQuery("SELECT SUM(QI_BL7_1PV) FROM Data WHERE time >= '2011-04-03 11:00' AND time < '2011-04-03 11:59'");
+                        results["Hour13"] = ExecuteQuery("SELECT SUM(QI_BL7_1PV) FROM Data WHERE time >= '2011-04-03 12:00' AND time < '2011-04-03 12:59'");
+                        results["Hour14"] = ExecuteQuery("SELECT SUM(QI_BL7_1PV) FROM Data WHERE time >= '2011-04-03 13:00' AND time < '2011-04-03 13:59'");
+                        results["Hour15"] = ExecuteQuery("SELECT SUM(QI_BL7_1PV) FROM Data WHERE time >= '2011-04-03 14:00' AND time < '2011-04-03 14:59'");
+                        results["Hour16"] = ExecuteQuery("SELECT SUM(QI_BL7_1PV) FROM Data WHERE time >= '2011-04-03 15:00' AND time < '2011-04-03 15:59'");
+                        results["Hour17"] = ExecuteQuery("SELECT SUM(QI_BL7_1PV) FROM Data WHERE time >= '2011-04-03 16:00' AND time < '2011-04-03 16:59'");
+                        results["Hour18"] = ExecuteQuery("SELECT SUM(QI_BL7_1PV) FROM Data WHERE time >= '2011-04-03 17:00' AND time < '2011-04-03 17:59'");
+                        results["Hour19"] = ExecuteQuery("SELECT SUM(QI_BL7_1PV) FROM Data WHERE time >= '2011-04-03 18:00' AND time < '2011-04-03 18:59'");
+                        results["Hour20"] = ExecuteQuery("SELECT SUM(QI_BL7_1PV) FROM Data WHERE time >= '2011-04-03 19:00' AND time < '2011-04-03 19:59'");
+                        results["Hour21"] = ExecuteQuery("SELECT SUM(QI_BL7_1PV) FROM Data WHERE time >= '2011-04-03 20:00' AND time < '2011-04-03 20:59'");
+                        results["Hour22"] = ExecuteQuery("SELECT SUM(QI_BL7_1PV) FROM Data WHERE time >= '2011-04-03 21:00' AND time < '2011-04-03 21:59'");
+                        results["Hour23"] = ExecuteQuery("SELECT SUM(QI_BL7_1PV) FROM Data WHERE time >= '2011-04-03 22:00' AND time < '2011-04-03 22:59'");
+                        results["Hour24"] = ExecuteQuery("SELECT SUM(QI_BL7_1PV) FROM Data WHERE time >= '2011-04-03 23:00' AND time < '2011-04-03 23:59'");
+                        results["Total"] = ExecuteQuery("SELECT SUM(QI_BL7_1PV) FROM Data WHERE time >= '2011-04-03 00:00' AND time < '2011-04-04 00:00'");
+
+                        break;
+
+                    case "QI_NTU_1PV":
+
+                        results["Hour01"] = ExecuteQuery("SELECT SUM(QI_NTU_1PV) FROM Data WHERE time >= '2011-04-03 00:00' AND time < '2011-04-03 00:59'");
+                        results["Hour02"] = ExecuteQuery("SELECT SUM(QI_NTU_1PV) FROM Data WHERE time >= '2011-04-03 01:00' AND time < '2011-04-03 01:59'");
+                        results["Hour03"] = ExecuteQuery("SELECT SUM(QI_NTU_1PV) FROM Data WHERE time >= '2011-04-03 02:00' AND time < '2011-04-03 02:59'");
+                        results["Hour04"] = ExecuteQuery("SELECT SUM(QI_NTU_1PV) FROM Data WHERE time >= '2011-04-03 03:00' AND time < '2011-04-03 03:59'");
+                        results["Hour05"] = ExecuteQuery("SELECT SUM(QI_NTU_1PV) FROM Data WHERE time >= '2011-04-03 04:00' AND time < '2011-04-03 04:59'");
+                        results["Hour06"] = ExecuteQuery("SELECT SUM(QI_NTU_1PV) FROM Data WHERE time >= '2011-04-03 05:00' AND time < '2011-04-03 05:59'");
+                        results["Hour07"] = ExecuteQuery("SELECT SUM(QI_NTU_1PV) FROM Data WHERE time >= '2011-04-03 06:00' AND time < '2011-04-03 06:59'");
+                        results["Hour08"] = ExecuteQuery("SELECT SUM(QI_NTU_1PV) FROM Data WHERE time >= '2011-04-03 07:00' AND time < '2011-04-03 07:59'");
+                        results["Hour09"] = ExecuteQuery("SELECT SUM(QI_NTU_1PV) FROM Data WHERE time >= '2011-04-03 08:00' AND time < '2011-04-03 08:59'");
+                        results["Hour10"] = ExecuteQuery("SELECT SUM(QI_NTU_1PV) FROM Data WHERE time >= '2011-04-03 09:00' AND time < '2011-04-03 09:59'");
+                        results["Hour11"] = ExecuteQuery("SELECT SUM(QI_NTU_1PV) FROM Data WHERE time >= '2011-04-03 10:00' AND time < '2011-04-03 10:59'");
+                        results["Hour12"] = ExecuteQuery("SELECT SUM(QI_NTU_1PV) FROM Data WHERE time >= '2011-04-03 11:00' AND time < '2011-04-03 11:59'");
+                        results["Hour13"] = ExecuteQuery("SELECT SUM(QI_NTU_1PV) FROM Data WHERE time >= '2011-04-03 12:00' AND time < '2011-04-03 12:59'");
+                        results["Hour14"] = ExecuteQuery("SELECT SUM(QI_NTU_1PV) FROM Data WHERE time >= '2011-04-03 13:00' AND time < '2011-04-03 13:59'");
+                        results["Hour15"] = ExecuteQuery("SELECT SUM(QI_NTU_1PV) FROM Data WHERE time >= '2011-04-03 14:00' AND time < '2011-04-03 14:59'");
+                        results["Hour16"] = ExecuteQuery("SELECT SUM(QI_NTU_1PV) FROM Data WHERE time >= '2011-04-03 15:00' AND time < '2011-04-03 15:59'");
+                        results["Hour17"] = ExecuteQuery("SELECT SUM(QI_NTU_1PV) FROM Data WHERE time >= '2011-04-03 16:00' AND time < '2011-04-03 16:59'");
+                        results["Hour18"] = ExecuteQuery("SELECT SUM(QI_NTU_1PV) FROM Data WHERE time >= '2011-04-03 17:00' AND time < '2011-04-03 17:59'");
+                        results["Hour19"] = ExecuteQuery("SELECT SUM(QI_NTU_1PV) FROM Data WHERE time >= '2011-04-03 18:00' AND time < '2011-04-03 18:59'");
+                        results["Hour20"] = ExecuteQuery("SELECT SUM(QI_NTU_1PV) FROM Data WHERE time >= '2011-04-03 19:00' AND time < '2011-04-03 19:59'");
+                        results["Hour21"] = ExecuteQuery("SELECT SUM(QI_NTU_1PV) FROM Data WHERE time >= '2011-04-03 20:00' AND time < '2011-04-03 20:59'");
+                        results["Hour22"] = ExecuteQuery("SELECT SUM(QI_NTU_1PV) FROM Data WHERE time >= '2011-04-03 21:00' AND time < '2011-04-03 21:59'");
+                        results["Hour23"] = ExecuteQuery("SELECT SUM(QI_NTU_1PV) FROM Data WHERE time >= '2011-04-03 22:00' AND time < '2011-04-03 22:59'");
+                        results["Hour24"] = ExecuteQuery("SELECT SUM(QI_NTU_1PV) FROM Data WHERE time >= '2011-04-03 23:00' AND time < '2011-04-03 23:59'");
+                        results["Total"] = ExecuteQuery("SELECT SUM(QI_NTU_1PV) FROM Data WHERE time >= '2011-04-03 00:00' AND time < '2011-04-04 00:00'");
+
+                        break;
+
+                    case "QI_BP2_1PV":
+
+                        results["Hour01"] = ExecuteQuery("SELECT SUM(QI_BP2_1PV) FROM Data WHERE time >= '2011-04-03 00:00' AND time < '2011-04-03 00:59'");
+                        results["Hour02"] = ExecuteQuery("SELECT SUM(QI_BP2_1PV) FROM Data WHERE time >= '2011-04-03 01:00' AND time < '2011-04-03 01:59'");
+                        results["Hour03"] = ExecuteQuery("SELECT SUM(QI_BP2_1PV) FROM Data WHERE time >= '2011-04-03 02:00' AND time < '2011-04-03 02:59'");
+                        results["Hour04"] = ExecuteQuery("SELECT SUM(QI_BP2_1PV) FROM Data WHERE time >= '2011-04-03 03:00' AND time < '2011-04-03 03:59'");
+                        results["Hour05"] = ExecuteQuery("SELECT SUM(QI_BP2_1PV) FROM Data WHERE time >= '2011-04-03 04:00' AND time < '2011-04-03 04:59'");
+                        results["Hour06"] = ExecuteQuery("SELECT SUM(QI_BP2_1PV) FROM Data WHERE time >= '2011-04-03 05:00' AND time < '2011-04-03 05:59'");
+                        results["Hour07"] = ExecuteQuery("SELECT SUM(QI_BP2_1PV) FROM Data WHERE time >= '2011-04-03 06:00' AND time < '2011-04-03 06:59'");
+                        results["Hour08"] = ExecuteQuery("SELECT SUM(QI_BP2_1PV) FROM Data WHERE time >= '2011-04-03 07:00' AND time < '2011-04-03 07:59'");
+                        results["Hour09"] = ExecuteQuery("SELECT SUM(QI_BP2_1PV) FROM Data WHERE time >= '2011-04-03 08:00' AND time < '2011-04-03 08:59'");
+                        results["Hour10"] = ExecuteQuery("SELECT SUM(QI_BP2_1PV) FROM Data WHERE time >= '2011-04-03 09:00' AND time < '2011-04-03 09:59'");
+                        results["Hour11"] = ExecuteQuery("SELECT SUM(QI_BP2_1PV) FROM Data WHERE time >= '2011-04-03 10:00' AND time < '2011-04-03 10:59'");
+                        results["Hour12"] = ExecuteQuery("SELECT SUM(QI_BP2_1PV) FROM Data WHERE time >= '2011-04-03 11:00' AND time < '2011-04-03 11:59'");
+                        results["Hour13"] = ExecuteQuery("SELECT SUM(QI_BP2_1PV) FROM Data WHERE time >= '2011-04-03 12:00' AND time < '2011-04-03 12:59'");
+                        results["Hour14"] = ExecuteQuery("SELECT SUM(QI_BP2_1PV) FROM Data WHERE time >= '2011-04-03 13:00' AND time < '2011-04-03 13:59'");
+                        results["Hour15"] = ExecuteQuery("SELECT SUM(QI_BP2_1PV) FROM Data WHERE time >= '2011-04-03 14:00' AND time < '2011-04-03 14:59'");
+                        results["Hour16"] = ExecuteQuery("SELECT SUM(QI_BP2_1PV) FROM Data WHERE time >= '2011-04-03 15:00' AND time < '2011-04-03 15:59'");
+                        results["Hour17"] = ExecuteQuery("SELECT SUM(QI_BP2_1PV) FROM Data WHERE time >= '2011-04-03 16:00' AND time < '2011-04-03 16:59'");
+                        results["Hour18"] = ExecuteQuery("SELECT SUM(QI_BP2_1PV) FROM Data WHERE time >= '2011-04-03 17:00' AND time < '2011-04-03 17:59'");
+                        results["Hour19"] = ExecuteQuery("SELECT SUM(QI_BP2_1PV) FROM Data WHERE time >= '2011-04-03 18:00' AND time < '2011-04-03 18:59'");
+                        results["Hour20"] = ExecuteQuery("SELECT SUM(QI_BP2_1PV) FROM Data WHERE time >= '2011-04-03 19:00' AND time < '2011-04-03 19:59'");
+                        results["Hour21"] = ExecuteQuery("SELECT SUM(QI_BP2_1PV) FROM Data WHERE time >= '2011-04-03 20:00' AND time < '2011-04-03 20:59'");
+                        results["Hour22"] = ExecuteQuery("SELECT SUM(QI_BP2_1PV) FROM Data WHERE time >= '2011-04-03 21:00' AND time < '2011-04-03 21:59'");
+                        results["Hour23"] = ExecuteQuery("SELECT SUM(QI_BP2_1PV) FROM Data WHERE time >= '2011-04-03 22:00' AND time < '2011-04-03 22:59'");
+                        results["Hour24"] = ExecuteQuery("SELECT SUM(QI_BP2_1PV) FROM Data WHERE time >= '2011-04-03 23:00' AND time < '2011-04-03 23:59'");
+                        results["Total"] = ExecuteQuery("SELECT SUM(QI_BP2_1PV) FROM Data WHERE time >= '2011-04-03 00:00' AND time < '2011-04-04 00:00'");
+
+                        break;
+
+                    case "QI_FUS_1PV":
+
+                        results["Hour01"] = ExecuteQuery("SELECT SUM(QI_FUS_1PV) FROM Data WHERE time >= '2011-04-03 00:00' AND time < '2011-04-03 00:59'");
+                        results["Hour02"] = ExecuteQuery("SELECT SUM(QI_FUS_1PV) FROM Data WHERE time >= '2011-04-03 01:00' AND time < '2011-04-03 01:59'");
+                        results["Hour03"] = ExecuteQuery("SELECT SUM(QI_FUS_1PV) FROM Data WHERE time >= '2011-04-03 02:00' AND time < '2011-04-03 02:59'");
+                        results["Hour04"] = ExecuteQuery("SELECT SUM(QI_FUS_1PV) FROM Data WHERE time >= '2011-04-03 03:00' AND time < '2011-04-03 03:59'");
+                        results["Hour05"] = ExecuteQuery("SELECT SUM(QI_FUS_1PV) FROM Data WHERE time >= '2011-04-03 04:00' AND time < '2011-04-03 04:59'");
+                        results["Hour06"] = ExecuteQuery("SELECT SUM(QI_FUS_1PV) FROM Data WHERE time >= '2011-04-03 05:00' AND time < '2011-04-03 05:59'");
+                        results["Hour07"] = ExecuteQuery("SELECT SUM(QI_FUS_1PV) FROM Data WHERE time >= '2011-04-03 06:00' AND time < '2011-04-03 06:59'");
+                        results["Hour08"] = ExecuteQuery("SELECT SUM(QI_FUS_1PV) FROM Data WHERE time >= '2011-04-03 07:00' AND time < '2011-04-03 07:59'");
+                        results["Hour09"] = ExecuteQuery("SELECT SUM(QI_FUS_1PV) FROM Data WHERE time >= '2011-04-03 08:00' AND time < '2011-04-03 08:59'");
+                        results["Hour10"] = ExecuteQuery("SELECT SUM(QI_FUS_1PV) FROM Data WHERE time >= '2011-04-03 09:00' AND time < '2011-04-03 09:59'");
+                        results["Hour11"] = ExecuteQuery("SELECT SUM(QI_FUS_1PV) FROM Data WHERE time >= '2011-04-03 10:00' AND time < '2011-04-03 10:59'");
+                        results["Hour12"] = ExecuteQuery("SELECT SUM(QI_FUS_1PV) FROM Data WHERE time >= '2011-04-03 11:00' AND time < '2011-04-03 11:59'");
+                        results["Hour13"] = ExecuteQuery("SELECT SUM(QI_FUS_1PV) FROM Data WHERE time >= '2011-04-03 12:00' AND time < '2011-04-03 12:59'");
+                        results["Hour14"] = ExecuteQuery("SELECT SUM(QI_FUS_1PV) FROM Data WHERE time >= '2011-04-03 13:00' AND time < '2011-04-03 13:59'");
+                        results["Hour15"] = ExecuteQuery("SELECT SUM(QI_FUS_1PV) FROM Data WHERE time >= '2011-04-03 14:00' AND time < '2011-04-03 14:59'");
+                        results["Hour16"] = ExecuteQuery("SELECT SUM(QI_FUS_1PV) FROM Data WHERE time >= '2011-04-03 15:00' AND time < '2011-04-03 15:59'");
+                        results["Hour17"] = ExecuteQuery("SELECT SUM(QI_FUS_1PV) FROM Data WHERE time >= '2011-04-03 16:00' AND time < '2011-04-03 16:59'");
+                        results["Hour18"] = ExecuteQuery("SELECT SUM(QI_FUS_1PV) FROM Data WHERE time >= '2011-04-03 17:00' AND time < '2011-04-03 17:59'");
+                        results["Hour19"] = ExecuteQuery("SELECT SUM(QI_FUS_1PV) FROM Data WHERE time >= '2011-04-03 18:00' AND time < '2011-04-03 18:59'");
+                        results["Hour20"] = ExecuteQuery("SELECT SUM(QI_FUS_1PV) FROM Data WHERE time >= '2011-04-03 19:00' AND time < '2011-04-03 19:59'");
+                        results["Hour21"] = ExecuteQuery("SELECT SUM(QI_FUS_1PV) FROM Data WHERE time >= '2011-04-03 20:00' AND time < '2011-04-03 20:59'");
+                        results["Hour22"] = ExecuteQuery("SELECT SUM(QI_FUS_1PV) FROM Data WHERE time >= '2011-04-03 21:00' AND time < '2011-04-03 21:59'");
+                        results["Hour23"] = ExecuteQuery("SELECT SUM(QI_FUS_1PV) FROM Data WHERE time >= '2011-04-03 22:00' AND time < '2011-04-03 22:59'");
+                        results["Hour24"] = ExecuteQuery("SELECT SUM(QI_FUS_1PV) FROM Data WHERE time >= '2011-04-03 23:00' AND time < '2011-04-03 23:59'");
+                        results["Total"] = ExecuteQuery("SELECT SUM(QI_FUS_1PV) FROM Data WHERE time >= '2011-04-03 00:00' AND time < '2011-04-04 00:00'");
+
+                        break;
+
+                    case "QI_F2BPV":
+
+                        results["Hour01"] = ExecuteQuery("SELECT SUM(QI_F2BPV) FROM Data WHERE time >= '2011-04-03 00:00' AND time < '2011-04-03 00:59'");
+                        results["Hour02"] = ExecuteQuery("SELECT SUM(QI_F2BPV) FROM Data WHERE time >= '2011-04-03 01:00' AND time < '2011-04-03 01:59'");
+                        results["Hour03"] = ExecuteQuery("SELECT SUM(QI_F2BPV) FROM Data WHERE time >= '2011-04-03 02:00' AND time < '2011-04-03 02:59'");
+                        results["Hour04"] = ExecuteQuery("SELECT SUM(QI_F2BPV) FROM Data WHERE time >= '2011-04-03 03:00' AND time < '2011-04-03 03:59'");
+                        results["Hour05"] = ExecuteQuery("SELECT SUM(QI_F2BPV) FROM Data WHERE time >= '2011-04-03 04:00' AND time < '2011-04-03 04:59'");
+                        results["Hour06"] = ExecuteQuery("SELECT SUM(QI_F2BPV) FROM Data WHERE time >= '2011-04-03 05:00' AND time < '2011-04-03 05:59'");
+                        results["Hour07"] = ExecuteQuery("SELECT SUM(QI_F2BPV) FROM Data WHERE time >= '2011-04-03 06:00' AND time < '2011-04-03 06:59'");
+                        results["Hour08"] = ExecuteQuery("SELECT SUM(QI_F2BPV) FROM Data WHERE time >= '2011-04-03 07:00' AND time < '2011-04-03 07:59'");
+                        results["Hour09"] = ExecuteQuery("SELECT SUM(QI_F2BPV) FROM Data WHERE time >= '2011-04-03 08:00' AND time < '2011-04-03 08:59'");
+                        results["Hour10"] = ExecuteQuery("SELECT SUM(QI_F2BPV) FROM Data WHERE time >= '2011-04-03 09:00' AND time < '2011-04-03 09:59'");
+                        results["Hour11"] = ExecuteQuery("SELECT SUM(QI_F2BPV) FROM Data WHERE time >= '2011-04-03 10:00' AND time < '2011-04-03 10:59'");
+                        results["Hour12"] = ExecuteQuery("SELECT SUM(QI_F2BPV) FROM Data WHERE time >= '2011-04-03 11:00' AND time < '2011-04-03 11:59'");
+                        results["Hour13"] = ExecuteQuery("SELECT SUM(QI_F2BPV) FROM Data WHERE time >= '2011-04-03 12:00' AND time < '2011-04-03 12:59'");
+                        results["Hour14"] = ExecuteQuery("SELECT SUM(QI_F2BPV) FROM Data WHERE time >= '2011-04-03 13:00' AND time < '2011-04-03 13:59'");
+                        results["Hour15"] = ExecuteQuery("SELECT SUM(QI_F2BPV) FROM Data WHERE time >= '2011-04-03 14:00' AND time < '2011-04-03 14:59'");
+                        results["Hour16"] = ExecuteQuery("SELECT SUM(QI_F2BPV) FROM Data WHERE time >= '2011-04-03 15:00' AND time < '2011-04-03 15:59'");
+                        results["Hour17"] = ExecuteQuery("SELECT SUM(QI_F2BPV) FROM Data WHERE time >= '2011-04-03 16:00' AND time < '2011-04-03 16:59'");
+                        results["Hour18"] = ExecuteQuery("SELECT SUM(QI_F2BPV) FROM Data WHERE time >= '2011-04-03 17:00' AND time < '2011-04-03 17:59'");
+                        results["Hour19"] = ExecuteQuery("SELECT SUM(QI_F2BPV) FROM Data WHERE time >= '2011-04-03 18:00' AND time < '2011-04-03 18:59'");
+                        results["Hour20"] = ExecuteQuery("SELECT SUM(QI_F2BPV) FROM Data WHERE time >= '2011-04-03 19:00' AND time < '2011-04-03 19:59'");
+                        results["Hour21"] = ExecuteQuery("SELECT SUM(QI_F2BPV) FROM Data WHERE time >= '2011-04-03 20:00' AND time < '2011-04-03 20:59'");
+                        results["Hour22"] = ExecuteQuery("SELECT SUM(QI_F2BPV) FROM Data WHERE time >= '2011-04-03 21:00' AND time < '2011-04-03 21:59'");
+                        results["Hour23"] = ExecuteQuery("SELECT SUM(QI_F2BPV) FROM Data WHERE time >= '2011-04-03 22:00' AND time < '2011-04-03 22:59'");
+                        results["Hour24"] = ExecuteQuery("SELECT SUM(QI_F2BPV) FROM Data WHERE time >= '2011-04-03 23:00' AND time < '2011-04-03 23:59'");
+                        results["Total"] = ExecuteQuery("SELECT SUM(QI_F2BPV) FROM Data WHERE time >= '2011-04-03 00:00' AND time < '2011-04-04 00:00'");
+
+                        break;
+
+                    case "QI_MUDPV":
+
+                        results["Hour01"] = ExecuteQuery("SELECT SUM(QI_MUDPV) FROM Data WHERE time >= '2011-04-03 00:00' AND time < '2011-04-03 00:59'");
+                        results["Hour02"] = ExecuteQuery("SELECT SUM(QI_MUDPV) FROM Data WHERE time >= '2011-04-03 01:00' AND time < '2011-04-03 01:59'");
+                        results["Hour03"] = ExecuteQuery("SELECT SUM(QI_MUDPV) FROM Data WHERE time >= '2011-04-03 02:00' AND time < '2011-04-03 02:59'");
+                        results["Hour04"] = ExecuteQuery("SELECT SUM(QI_MUDPV) FROM Data WHERE time >= '2011-04-03 03:00' AND time < '2011-04-03 03:59'");
+                        results["Hour05"] = ExecuteQuery("SELECT SUM(QI_MUDPV) FROM Data WHERE time >= '2011-04-03 04:00' AND time < '2011-04-03 04:59'");
+                        results["Hour06"] = ExecuteQuery("SELECT SUM(QI_MUDPV) FROM Data WHERE time >= '2011-04-03 05:00' AND time < '2011-04-03 05:59'");
+                        results["Hour07"] = ExecuteQuery("SELECT SUM(QI_MUDPV) FROM Data WHERE time >= '2011-04-03 06:00' AND time < '2011-04-03 06:59'");
+                        results["Hour08"] = ExecuteQuery("SELECT SUM(QI_MUDPV) FROM Data WHERE time >= '2011-04-03 07:00' AND time < '2011-04-03 07:59'");
+                        results["Hour09"] = ExecuteQuery("SELECT SUM(QI_MUDPV) FROM Data WHERE time >= '2011-04-03 08:00' AND time < '2011-04-03 08:59'");
+                        results["Hour10"] = ExecuteQuery("SELECT SUM(QI_MUDPV) FROM Data WHERE time >= '2011-04-03 09:00' AND time < '2011-04-03 09:59'");
+                        results["Hour11"] = ExecuteQuery("SELECT SUM(QI_MUDPV) FROM Data WHERE time >= '2011-04-03 10:00' AND time < '2011-04-03 10:59'");
+                        results["Hour12"] = ExecuteQuery("SELECT SUM(QI_MUDPV) FROM Data WHERE time >= '2011-04-03 11:00' AND time < '2011-04-03 11:59'");
+                        results["Hour13"] = ExecuteQuery("SELECT SUM(QI_MUDPV) FROM Data WHERE time >= '2011-04-03 12:00' AND time < '2011-04-03 12:59'");
+                        results["Hour14"] = ExecuteQuery("SELECT SUM(QI_MUDPV) FROM Data WHERE time >= '2011-04-03 13:00' AND time < '2011-04-03 13:59'");
+                        results["Hour15"] = ExecuteQuery("SELECT SUM(QI_MUDPV) FROM Data WHERE time >= '2011-04-03 14:00' AND time < '2011-04-03 14:59'");
+                        results["Hour16"] = ExecuteQuery("SELECT SUM(QI_MUDPV) FROM Data WHERE time >= '2011-04-03 15:00' AND time < '2011-04-03 15:59'");
+                        results["Hour17"] = ExecuteQuery("SELECT SUM(QI_MUDPV) FROM Data WHERE time >= '2011-04-03 16:00' AND time < '2011-04-03 16:59'");
+                        results["Hour18"] = ExecuteQuery("SELECT SUM(QI_MUDPV) FROM Data WHERE time >= '2011-04-03 17:00' AND time < '2011-04-03 17:59'");
+                        results["Hour19"] = ExecuteQuery("SELECT SUM(QI_MUDPV) FROM Data WHERE time >= '2011-04-03 18:00' AND time < '2011-04-03 18:59'");
+                        results["Hour20"] = ExecuteQuery("SELECT SUM(QI_MUDPV) FROM Data WHERE time >= '2011-04-03 19:00' AND time < '2011-04-03 19:59'");
+                        results["Hour21"] = ExecuteQuery("SELECT SUM(QI_MUDPV) FROM Data WHERE time >= '2011-04-03 20:00' AND time < '2011-04-03 20:59'");
+                        results["Hour22"] = ExecuteQuery("SELECT SUM(QI_MUDPV) FROM Data WHERE time >= '2011-04-03 21:00' AND time < '2011-04-03 21:59'");
+                        results["Hour23"] = ExecuteQuery("SELECT SUM(QI_MUDPV) FROM Data WHERE time >= '2011-04-03 22:00' AND time < '2011-04-03 22:59'");
+                        results["Hour24"] = ExecuteQuery("SELECT SUM(QI_MUDPV) FROM Data WHERE time >= '2011-04-03 23:00' AND time < '2011-04-03 23:59'");
+                        results["Total"] = ExecuteQuery("SELECT SUM(QI_MUDPV) FROM Data WHERE time >= '2011-04-03 00:00' AND time < '2011-04-04 00:00'");
+
+                        break;
+
+                    case "QI_HOTPV":
+
+                        results["Hour01"] = ExecuteQuery("SELECT SUM(QI_HOTPV) FROM Data WHERE time >= '2011-04-03 00:00' AND time < '2011-04-03 00:59'");
+                        results["Hour02"] = ExecuteQuery("SELECT SUM(QI_HOTPV) FROM Data WHERE time >= '2011-04-03 01:00' AND time < '2011-04-03 01:59'");
+                        results["Hour03"] = ExecuteQuery("SELECT SUM(QI_HOTPV) FROM Data WHERE time >= '2011-04-03 02:00' AND time < '2011-04-03 02:59'");
+                        results["Hour04"] = ExecuteQuery("SELECT SUM(QI_HOTPV) FROM Data WHERE time >= '2011-04-03 03:00' AND time < '2011-04-03 03:59'");
+                        results["Hour05"] = ExecuteQuery("SELECT SUM(QI_HOTPV) FROM Data WHERE time >= '2011-04-03 04:00' AND time < '2011-04-03 04:59'");
+                        results["Hour06"] = ExecuteQuery("SELECT SUM(QI_HOTPV) FROM Data WHERE time >= '2011-04-03 05:00' AND time < '2011-04-03 05:59'");
+                        results["Hour07"] = ExecuteQuery("SELECT SUM(QI_HOTPV) FROM Data WHERE time >= '2011-04-03 06:00' AND time < '2011-04-03 06:59'");
+                        results["Hour08"] = ExecuteQuery("SELECT SUM(QI_HOTPV) FROM Data WHERE time >= '2011-04-03 07:00' AND time < '2011-04-03 07:59'");
+                        results["Hour09"] = ExecuteQuery("SELECT SUM(QI_HOTPV) FROM Data WHERE time >= '2011-04-03 08:00' AND time < '2011-04-03 08:59'");
+                        results["Hour10"] = ExecuteQuery("SELECT SUM(QI_HOTPV) FROM Data WHERE time >= '2011-04-03 09:00' AND time < '2011-04-03 09:59'");
+                        results["Hour11"] = ExecuteQuery("SELECT SUM(QI_HOTPV) FROM Data WHERE time >= '2011-04-03 10:00' AND time < '2011-04-03 10:59'");
+                        results["Hour12"] = ExecuteQuery("SELECT SUM(QI_HOTPV) FROM Data WHERE time >= '2011-04-03 11:00' AND time < '2011-04-03 11:59'");
+                        results["Hour13"] = ExecuteQuery("SELECT SUM(QI_HOTPV) FROM Data WHERE time >= '2011-04-03 12:00' AND time < '2011-04-03 12:59'");
+                        results["Hour14"] = ExecuteQuery("SELECT SUM(QI_HOTPV) FROM Data WHERE time >= '2011-04-03 13:00' AND time < '2011-04-03 13:59'");
+                        results["Hour15"] = ExecuteQuery("SELECT SUM(QI_HOTPV) FROM Data WHERE time >= '2011-04-03 14:00' AND time < '2011-04-03 14:59'");
+                        results["Hour16"] = ExecuteQuery("SELECT SUM(QI_HOTPV) FROM Data WHERE time >= '2011-04-03 15:00' AND time < '2011-04-03 15:59'");
+                        results["Hour17"] = ExecuteQuery("SELECT SUM(QI_HOTPV) FROM Data WHERE time >= '2011-04-03 16:00' AND time < '2011-04-03 16:59'");
+                        results["Hour18"] = ExecuteQuery("SELECT SUM(QI_HOTPV) FROM Data WHERE time >= '2011-04-03 17:00' AND time < '2011-04-03 17:59'");
+                        results["Hour19"] = ExecuteQuery("SELECT SUM(QI_HOTPV) FROM Data WHERE time >= '2011-04-03 18:00' AND time < '2011-04-03 18:59'");
+                        results["Hour20"] = ExecuteQuery("SELECT SUM(QI_HOTPV) FROM Data WHERE time >= '2011-04-03 19:00' AND time < '2011-04-03 19:59'");
+                        results["Hour21"] = ExecuteQuery("SELECT SUM(QI_HOTPV) FROM Data WHERE time >= '2011-04-03 20:00' AND time < '2011-04-03 20:59'");
+                        results["Hour22"] = ExecuteQuery("SELECT SUM(QI_HOTPV) FROM Data WHERE time >= '2011-04-03 21:00' AND time < '2011-04-03 21:59'");
+                        results["Hour23"] = ExecuteQuery("SELECT SUM(QI_HOTPV) FROM Data WHERE time >= '2011-04-03 22:00' AND time < '2011-04-03 22:59'");
+                        results["Hour24"] = ExecuteQuery("SELECT SUM(QI_HOTPV) FROM Data WHERE time >= '2011-04-03 23:00' AND time < '2011-04-03 23:59'");
+                        results["Total"] = ExecuteQuery("SELECT SUM(QI_HOTPV) FROM Data WHERE time >= '2011-04-03 00:00' AND time < '2011-04-04 00:00'");
+
+                        break;
+
+                    case "QI_BP3PV":
+
+                        results["Hour01"] = ExecuteQuery("SELECT SUM(QI_BP3PV) FROM Data WHERE time >= '2011-04-03 00:00' AND time < '2011-04-03 00:59'");
+                        results["Hour02"] = ExecuteQuery("SELECT SUM(QI_BP3PV) FROM Data WHERE time >= '2011-04-03 01:00' AND time < '2011-04-03 01:59'");
+                        results["Hour03"] = ExecuteQuery("SELECT SUM(QI_BP3PV) FROM Data WHERE time >= '2011-04-03 02:00' AND time < '2011-04-03 02:59'");
+                        results["Hour04"] = ExecuteQuery("SELECT SUM(QI_BP3PV) FROM Data WHERE time >= '2011-04-03 03:00' AND time < '2011-04-03 03:59'");
+                        results["Hour05"] = ExecuteQuery("SELECT SUM(QI_BP3PV) FROM Data WHERE time >= '2011-04-03 04:00' AND time < '2011-04-03 04:59'");
+                        results["Hour06"] = ExecuteQuery("SELECT SUM(QI_BP3PV) FROM Data WHERE time >= '2011-04-03 05:00' AND time < '2011-04-03 05:59'");
+                        results["Hour07"] = ExecuteQuery("SELECT SUM(QI_BP3PV) FROM Data WHERE time >= '2011-04-03 06:00' AND time < '2011-04-03 06:59'");
+                        results["Hour08"] = ExecuteQuery("SELECT SUM(QI_BP3PV) FROM Data WHERE time >= '2011-04-03 07:00' AND time < '2011-04-03 07:59'");
+                        results["Hour09"] = ExecuteQuery("SELECT SUM(QI_BP3PV) FROM Data WHERE time >= '2011-04-03 08:00' AND time < '2011-04-03 08:59'");
+                        results["Hour10"] = ExecuteQuery("SELECT SUM(QI_BP3PV) FROM Data WHERE time >= '2011-04-03 09:00' AND time < '2011-04-03 09:59'");
+                        results["Hour11"] = ExecuteQuery("SELECT SUM(QI_BP3PV) FROM Data WHERE time >= '2011-04-03 10:00' AND time < '2011-04-03 10:59'");
+                        results["Hour12"] = ExecuteQuery("SELECT SUM(QI_BP3PV) FROM Data WHERE time >= '2011-04-03 11:00' AND time < '2011-04-03 11:59'");
+                        results["Hour13"] = ExecuteQuery("SELECT SUM(QI_BP3PV) FROM Data WHERE time >= '2011-04-03 12:00' AND time < '2011-04-03 12:59'");
+                        results["Hour14"] = ExecuteQuery("SELECT SUM(QI_BP3PV) FROM Data WHERE time >= '2011-04-03 13:00' AND time < '2011-04-03 13:59'");
+                        results["Hour15"] = ExecuteQuery("SELECT SUM(QI_BP3PV) FROM Data WHERE time >= '2011-04-03 14:00' AND time < '2011-04-03 14:59'");
+                        results["Hour16"] = ExecuteQuery("SELECT SUM(QI_BP3PV) FROM Data WHERE time >= '2011-04-03 15:00' AND time < '2011-04-03 15:59'");
+                        results["Hour17"] = ExecuteQuery("SELECT SUM(QI_BP3PV) FROM Data WHERE time >= '2011-04-03 16:00' AND time < '2011-04-03 16:59'");
+                        results["Hour18"] = ExecuteQuery("SELECT SUM(QI_BP3PV) FROM Data WHERE time >= '2011-04-03 17:00' AND time < '2011-04-03 17:59'");
+                        results["Hour19"] = ExecuteQuery("SELECT SUM(QI_BP3PV) FROM Data WHERE time >= '2011-04-03 18:00' AND time < '2011-04-03 18:59'");
+                        results["Hour20"] = ExecuteQuery("SELECT SUM(QI_BP3PV) FROM Data WHERE time >= '2011-04-03 19:00' AND time < '2011-04-03 19:59'");
+                        results["Hour21"] = ExecuteQuery("SELECT SUM(QI_BP3PV) FROM Data WHERE time >= '2011-04-03 20:00' AND time < '2011-04-03 20:59'");
+                        results["Hour22"] = ExecuteQuery("SELECT SUM(QI_BP3PV) FROM Data WHERE time >= '2011-04-03 21:00' AND time < '2011-04-03 21:59'");
+                        results["Hour23"] = ExecuteQuery("SELECT SUM(QI_BP3PV) FROM Data WHERE time >= '2011-04-03 22:00' AND time < '2011-04-03 22:59'");
+                        results["Hour24"] = ExecuteQuery("SELECT SUM(QI_BP3PV) FROM Data WHERE time >= '2011-04-03 23:00' AND time < '2011-04-03 23:59'");
+                        results["Total"] = ExecuteQuery("SELECT SUM(QI_BP3PV) FROM Data WHERE time >= '2011-04-03 00:00' AND time < '2011-04-04 00:00'");
+
+
+                        break;
+
+                }
+
+            }
+            ViewBag.SelectedInput = input;
+            ViewBag.Results = results;
+            return View("ViewAll");
+        }
+
+        /*
+
+                public ActionResult CalculateSum(string input)
+                {
+                    string connectionString = "Server=NOTEBOOK-RAJITH\\SQLEXPRESS;Database=PowerConsumption;Trusted_Connection=True;TrustServerCertificate=true";
+
+                    // Create a dictionary to store the results of multiple queries
+                    Dictionary<string, int> results = new Dictionary<string, int>();
+
+                    int sum = 0;
+                    if (!string.IsNullOrEmpty(input))
+                    {
+                        DateTime now = DateTime.Now;
+                        DateTime startDateTime = now.AddHours(-24); // Calculate the start time (24 hours ago)
+
+                        //string sqlQuery = string.Empty;
+                        switch (input)
+                        {
+                            case "QI_BL1_1PV":
+                                for (int i = 0; i < 24; i++)
+                                {
+                                    DateTime fromTime = startDateTime.AddHours(i);
+                                    DateTime toTime = startDateTime.AddHours(i + 1);
+                                    string key = $"QI_BL1_1PV-{i + 1:D2}";
+
+                                    string sqlQuery = $"SELECT SUM(QI_BL1_1PV) FROM Data WHERE time >= '{fromTime:yyyy-MM-dd HH:mm}' AND time < '{toTime:yyyy-MM-dd HH:mm}'";
+                                    results[key] = ExecuteQuery(sqlQuery);
+                                }
+                                break;
+
+                            case "QI_BL2_1PV":
+                                for (int i = 0; i < 24; i++)
+                                {
+                                    DateTime fromTime = startDateTime.AddHours(i);
+                                    DateTime toTime = startDateTime.AddHours(i + 1);
+                                    string key = $"QI_BL2_1PV-{i + 1:D2}";
+
+                                    string sqlQuery = $"SELECT SUM(QI_BL2_1PV) FROM Data WHERE time >= '{fromTime:yyyy-MM-dd HH:mm}' AND time < '{toTime:yyyy-MM-dd HH:mm}'";
+                                    results[key] = ExecuteQuery(sqlQuery);
+                                }
+                                break;
+
+                            case "QI_BL3_1PV":
+                                for (int i = 0; i < 24; i++)
+                                {
+                                    DateTime fromTime = startDateTime.AddHours(i);
+                                    DateTime toTime = startDateTime.AddHours(i + 1);
+                                    string key = $"QI_BL3_1PV-{i + 1:D2}";
+
+                                    string sqlQuery = $"SELECT SUM(QI_BL3_1PV) FROM Data WHERE time >= '{fromTime:yyyy-MM-dd HH:mm}' AND time < '{toTime:yyyy-MM-dd HH:mm}'";
+                                    results[key] = ExecuteQuery(sqlQuery);
+                                }
+                                break;
+
+                            case "QI_BL4_1PV":
+                                for (int i = 0; i < 24; i++)
+                                {
+                                    DateTime fromTime = startDateTime.AddHours(i);
+                                    DateTime toTime = startDateTime.AddHours(i + 1);
+                                    string key = $"QI_BL4_1PV-{i + 1:D2}";
+
+                                    string sqlQuery = $"SELECT SUM(QI_BL4_1PV) FROM Data WHERE time >= '{fromTime:yyyy-MM-dd HH:mm}' AND time < '{toTime:yyyy-MM-dd HH:mm}'";
+                                    results[key] = ExecuteQuery(sqlQuery);
+                                }
+                                break;
+
+                            case "QI_BLA_1PV":
+                                for (int i = 0; i < 24; i++)
+                                {
+                                    DateTime fromTime = startDateTime.AddHours(i);
+                                    DateTime toTime = startDateTime.AddHours(i + 1);
+                                    string key = $"QI_BLA_1PV-{i + 1:D2}";
+
+                                    string sqlQuery = $"SELECT SUM(QI_BLA_1PV) FROM Data WHERE time >= '{fromTime:yyyy-MM-dd HH:mm}' AND time < '{toTime:yyyy-MM-dd HH:mm}'";
+                                    results[key] = ExecuteQuery(sqlQuery);
+                                }
+                                break;
+
+                            case "QI_BL5_1PV":
+                                for (int i = 0; i < 24; i++)
+                                {
+                                    DateTime fromTime = startDateTime.AddHours(i);
+                                    DateTime toTime = startDateTime.AddHours(i + 1);
+                                    string key = $"QI_BL5_1PV-{i + 1:D2}";
+
+                                    string sqlQuery = $"SELECT SUM(QI_BL5_1PV) FROM Data WHERE time >= '{fromTime:yyyy-MM-dd HH:mm}' AND time < '{toTime:yyyy-MM-dd HH:mm}'";
+                                    results[key] = ExecuteQuery(sqlQuery);
+                                }
+                                break;
+
+                            case "QI_BL6_1PV":
+                                for (int i = 0; i < 24; i++)
+                                {
+                                    DateTime fromTime = startDateTime.AddHours(i);
+                                    DateTime toTime = startDateTime.AddHours(i + 1);
+                                    string key = $"QI_BL6_1PV-{i + 1:D2}";
+
+                                    string sqlQuery = $"SELECT SUM(QI_BL6_1PV) FROM Data WHERE time >= '{fromTime:yyyy-MM-dd HH:mm}' AND time < '{toTime:yyyy-MM-dd HH:mm}'";
+                                    results[key] = ExecuteQuery(sqlQuery);
+                                }
+                                break;
+
+                            case "QI_BL7_1PV":
+                                for (int i = 0; i < 24; i++)
+                                {
+                                    DateTime fromTime = startDateTime.AddHours(i);
+                                    DateTime toTime = startDateTime.AddHours(i + 1);
+                                    string key = $"QI_BL7_1PV-{i + 1:D2}";
+
+                                    string sqlQuery = $"SELECT SUM(QI_BL7_1PV) FROM Data WHERE time >= '{fromTime:yyyy-MM-dd HH:mm}' AND time < '{toTime:yyyy-MM-dd HH:mm}'";
+                                    results[key] = ExecuteQuery(sqlQuery);
+                                }
+                                break;
+
+                            case "QI_NTU_1PV":
+                                for (int i = 0; i < 24; i++)
+                                {
+                                    DateTime fromTime = startDateTime.AddHours(i);
+                                    DateTime toTime = startDateTime.AddHours(i + 1);
+                                    string key = $"QI_NTU_1PV-{i + 1:D2}";
+
+                                    string sqlQuery = $"SELECT SUM(QI_NTU_1PV) FROM Data WHERE time >= '{fromTime:yyyy-MM-dd HH:mm}' AND time < '{toTime:yyyy-MM-dd HH:mm}'";
+                                    results[key] = ExecuteQuery(sqlQuery);
+                                }
+                                break;
+
+                            case "QI_BP2_1PV":
+                                for (int i = 0; i < 24; i++)
+                                {
+                                    DateTime fromTime = startDateTime.AddHours(i);
+                                    DateTime toTime = startDateTime.AddHours(i + 1);
+                                    string key = $"QI_BP2_1PV-{i + 1:D2}";
+
+                                    string sqlQuery = $"SELECT SUM(QI_BP2_1PV) FROM Data WHERE time >= '{fromTime:yyyy-MM-dd HH:mm}' AND time < '{toTime:yyyy-MM-dd HH:mm}'";
+                                    results[key] = ExecuteQuery(sqlQuery);
+                                }
+                                break;
+
+                            case "QI_FUS_1PV":
+                                for (int i = 0; i < 24; i++)
+                                {
+                                    DateTime fromTime = startDateTime.AddHours(i);
+                                    DateTime toTime = startDateTime.AddHours(i + 1);
+                                    string key = $"QI_FUS_1PV-{i + 1:D2}";
+
+                                    string sqlQuery = $"SELECT SUM(QI_FUS_1PV) FROM Data WHERE time >= '{fromTime:yyyy-MM-dd HH:mm}' AND time < '{toTime:yyyy-MM-dd HH:mm}'";
+                                    results[key] = ExecuteQuery(sqlQuery);
+                                }
+                                break;
+
+                            case "QI_F2BPV":
+                                for (int i = 0; i < 24; i++)
+                                {
+                                    DateTime fromTime = startDateTime.AddHours(i);
+                                    DateTime toTime = startDateTime.AddHours(i + 1);
+                                    string key = $"QI_F2BPV-{i + 1:D2}";
+
+                                    string sqlQuery = $"SELECT SUM(QI_F2BPV) FROM Data WHERE time >= '{fromTime:yyyy-MM-dd HH:mm}' AND time < '{toTime:yyyy-MM-dd HH:mm}'";
+                                    results[key] = ExecuteQuery(sqlQuery);
+                                }
+                                break;
+
+                            case "QI_MUDPV":
+                                for (int i = 0; i < 24; i++)
+                                {
+                                    DateTime fromTime = startDateTime.AddHours(i);
+                                    DateTime toTime = startDateTime.AddHours(i + 1);
+                                    string key = $"QI_MUDPV-{i + 1:D2}";
+
+                                    string sqlQuery = $"SELECT SUM(QI_MUDPV) FROM Data WHERE time >= '{fromTime:yyyy-MM-dd HH:mm}' AND time < '{toTime:yyyy-MM-dd HH:mm}'";
+                                    results[key] = ExecuteQuery(sqlQuery);
+                                }
+                                break;
+
+                            case "QI_HOTPV":
+                                for (int i = 0; i < 24; i++)
+                                {
+                                    DateTime fromTime = startDateTime.AddHours(i);
+                                    DateTime toTime = startDateTime.AddHours(i + 1);
+                                    string key = $"QI_HOTPV-{i + 1:D2}";
+
+                                    string sqlQuery = $"SELECT SUM(QI_HOTPV) FROM Data WHERE time >= '{fromTime:yyyy-MM-dd HH:mm}' AND time < '{toTime:yyyy-MM-dd HH:mm}'";
+                                    results[key] = ExecuteQuery(sqlQuery);
+                                }
+                                break;
+
+                            case "QI_BP3PV":
+                                for (int i = 0; i < 24; i++)
+                                {
+                                    DateTime fromTime = startDateTime.AddHours(i);
+                                    DateTime toTime = startDateTime.AddHours(i + 1);
+                                    string key = $"QI_BP3PV-{i + 1:D2}";
+
+                                    string sqlQuery = $"SELECT SUM(QI_BP3PV) FROM Data WHERE time >= '{fromTime:yyyy-MM-dd HH:mm}' AND time < '{toTime:yyyy-MM-dd HH:mm}'";
+                                    results[key] = ExecuteQuery(sqlQuery);
+                                }
+                                break;
+
+                        }
+
+                    }
+                    ViewBag.Results = results;
+                    // Return a partial view that contains the results as HTML
+                    //return PartialView("_ResultsPartialView");
+                    return View("ViewAll");
+                }
+
+        */
+
+        private int ExecuteQuery(string sqlQuery)
+        {
+            string connectionString = "Server=NOTEBOOK-RAJITH\\SQLEXPRESS;Database=PowerConsumption;Trusted_Connection=True;TrustServerCertificate=true";
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (var command = new SqlCommand(sqlQuery, connection))
+                {
+                    var result = command.ExecuteScalar();
+
+                    if (Convert.IsDBNull(result) || result == null)
+                    {
+                        return 0;
+                    }
+                    else
+                    {
+                        return Convert.ToInt32(result);
+                    }
+                }
+            }
+        }
+
+
     }
 }
+

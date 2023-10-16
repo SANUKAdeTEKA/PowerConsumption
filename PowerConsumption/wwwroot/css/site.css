@@ -51,23 +51,103 @@ input[type=submit] {
     touch-action: manipulation;
 }
 
+
+/* Add some general styles to improve the table appearance */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+table, th, td {
+    border: 1px solid #333;
+    text-align: center; /* Center align text */
+}
+
+/* Style the table header */
 th {
-    background-color: dimgray;
-    color: white;
-    border-bottom: 1px solid #ddd;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
 }
 
-td {
-    padding: 15px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
+/* Style the table rows alternately for better readability */
 tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
-tr:hover {
-    background-color: lightcoral;
+tr:nth-child(odd) {
+    background-color: #fff;
 }
 
+/* Style the table cells */
+td {
+    padding: 10px;
+    border: 1px solid #ddd; /* Add visual borders between cells */
+}
+
+/* Add hover effect on table rows */
+tr:hover {
+    background-color: #ddd;
+}
+
+/* Add a subtle shadow to the table for depth */
+table {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Add a border radius to soften table corners */
+table, th, td {
+    border-radius: 5px;
+}
+
+
+/* Add some general styles to improve the table appearance */
+/*table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+table, th, td {
+    border: 1px solid #333;
+    text-align: center;*/ /* Center align text */
+/*}*/
+
+/* Style the table header */
+/*th {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+}*/
+
+/* Style the table rows alternately for better readability */
+/*tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(odd) {
+    background-color: #fff;
+}*/
+
+/* Style the table cells */
+/*td {
+    padding: 10px;
+}*/
+
+/* Add hover effect on table rows */
+/*tr:hover {
+    background-color: #ddd;
+}*/
+
+/* Add a subtle shadow to the table for depth */
+/*table {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}*/
+
+/* Add a border radius to soften table corners */
+/*table, th, td {
+    border-radius: 5px;
+}*/

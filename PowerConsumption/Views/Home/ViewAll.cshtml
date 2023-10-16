@@ -2,12 +2,13 @@
     ViewData["Title"] = "Consumption Summary";
 }
 
-
 <div align="center">
     <h1>Consumption Summary</h1>
 
-    <form id="form1">
-        <select name="Choice">
+    @using (Html.BeginForm("CalculateSum", "Home", FormMethod.Post))
+    {
+        <label for="input">Select an option: </label>
+        <select name="input" id="input">
             <option value="QI_BL1_1PV">QI_BL1_1PV</option>
             <option value="QI_BL2_1PV">QI_BL2_1PV</option>
             <option value="QI_BL3_1PV">QI_BL3_1PV</option>
@@ -24,9 +25,146 @@
             <option value="QI_HOTPV">QI_HOTPV</option>
             <option value="QI_BP3PV">QI_BP3PV</option>
         </select>
-    </form>
-</div>
-</br>
-<div class="text-center">
-    <button type="button" onclick="GetSum()">Get Sum</button>
+        <input type="submit" value="Calculate Sum" />
+    }
+
+    <br />
+    <br />
+    <br />
+
+    @{
+        var results = ViewBag.Results;
+    }
+
+    @if (results != null)
+    {
+        <h3>Results:</h3>
+
+        <table>
+            <thead>
+                <th>Customer</th>
+                <th>@ViewBag.SelectedInput</th>
+            </thead>
+            <tr>
+                <td><b>Hour</b></td>
+                <td><b>Power Consumption (kWh)</b></td>
+            </tr>
+            <tr>
+                <td>00:00</td>
+                <td>@results["Hour01"]</td>
+            </tr>
+            <tr>
+                <td>01:00</td>
+                <td>@results["Hour02"]</td>
+            </tr>
+            <tr>
+                <td>02:00</td>
+                <td>@results["Hour03"]</td>
+            </tr>
+            <tr>
+                <td>03:00</td>
+                <td>@results["Hour04"]</td>
+            </tr>
+            <tr>
+                <td>04:00</td>
+                <td>@results["Hour05"]</td>
+            </tr>
+            <tr>
+                <td>05:00</td>
+                <td>@results["Hour06"]</td>
+            </tr>
+            <tr>
+                <td>06:00</td>
+                <td>@results["Hour07"]</td>
+            </tr>
+            <tr>
+                <td>07:00</td>
+                <td>@results["Hour08"]</td>
+            </tr>
+            <tr>
+                <td>08:00</td>
+                <td>@results["Hour09"]</td>
+            </tr>
+            <tr>
+                <td>09:00</td>
+                <td>@results["Hour10"]</td>
+            </tr>
+            <tr>
+                <td>10:00</td>
+                <td>@results["Hour11"]</td>
+            </tr>
+            <tr>
+                <td>11:00</td>
+                <td>@results["Hour12"]</td>
+            </tr>
+            <tr>
+                <td>12:00</td>
+                <td>@results["Hour13"]</td>
+            </tr>
+            <tr>
+                <td>13:00</td>
+                <td>@results["Hour14"]</td>
+            </tr>
+            <tr>
+                <td>14:00</td>
+                <td>@results["Hour15"]</td>
+            </tr>
+            <tr>
+                <td>15:00</td>
+                <td>@results["Hour16"]</td>
+            </tr>
+            <tr>
+                <td>16:00</td>
+                <td>@results["Hour17"]</td>
+            </tr>
+            <tr>
+                <td>17:00</td>
+                <td>@results["Hour18"]</td>
+            </tr>
+            <tr>
+                <td>18:00</td>
+                <td>@results["Hour19"]</td>
+            </tr>
+            <tr>
+                <td>19:00</td>
+                <td>@results["Hour20"]</td>
+            </tr>
+            <tr>
+                <td>20:00</td>
+                <td>@results["Hour21"]</td>
+            </tr>
+            <tr>
+                <td>21:00</td>
+                <td>@results["Hour22"]</td>
+            </tr>
+            <tr>
+                <td>22:00</td>
+                <td>@results["Hour23"]</td>
+            </tr>
+            <tr>
+                <td>23:00</td>
+                <td>@results["Hour24"]</td>
+            </tr>
+            <tr>
+                <td><b>Total</b></td>
+                <td><b>@results["Total"]</b></td>
+            </tr>
+        </table>
+    }
+
+@* 
+    <div id="resultsTable">
+        @if (ViewBag.Results != null)
+        {
+            <h3>Results:</h3>
+            <ul>
+                @foreach (var result in ViewBag.Results)
+                {
+                    <li>@result.Key: @result.Value</li>
+                }
+            </ul>
+        }
+    </div>
+ *@
+
 </div>
