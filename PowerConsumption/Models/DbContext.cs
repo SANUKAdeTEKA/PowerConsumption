@@ -17,5 +17,14 @@ namespace PowerConsumption.Models
         public DbSet<Data> Data { get; set; }
     }
 
+    public class YourDbContext : DbContext
+    {
+        public YourDbContext(DbContextOptions<YourDbContext> options) : base(options)
+        {
+        }
+
+        // DbSet properties and other configuration
+
+    }
 
 }

@@ -180,6 +180,74 @@ namespace PwrConsFinal.Controllers
             }
         }
 
+
+
+
+
+        /*
+
+                /// <summary>
+                ///   Finds the peaks of a signal.
+                /// </summary>
+                /// 
+                /// <param name="samples">The samples.</param>
+                /// 
+                /// <returns>The index of the peaks found in the sample.</returns>
+                /// 
+                public static int[] FindPeaks(this double[] samples)
+                {
+                    var peaks = new List<int>();
+
+                    for (int i = 1; i < samples.Length - 1; i++)
+                    {
+                        if (samples[i] > samples[i - 1] && samples[i] > samples[i + 1])
+                            peaks.Add(i);
+                    }
+
+                    return peaks.ToArray();
+                }
+
+
+
+
+                public class PeakController : Controller
+                {
+                    private readonly YourDbContext _context;
+
+                    public PeakController(YourDbContext context)
+                    {
+                        _context = context;
+                    }
+
+                    public IActionResult DisplayPeaks(int selectedValue)
+                    {
+
+
+                        // Query the database to retrieve the relevant data
+                        var data = _context.Data.Where(x => x.SomeColumn == selectedValue).ToList();
+
+                        // Calculate peak values
+                        var peakValues = new List<double>();
+                        for (int i = 1; i < data.Count - 1; i++)
+                        {
+                            if (data[i] > data[i - 1] && data[i] > data[i + 1])
+                            {
+                                peakValues.Add(data[i]);
+                            }
+                        }
+
+                        var model = new PeakModel
+                        {
+                            PeakValues = peakValues
+                        };
+
+                        return View(model);
+                    }
+                }
+
+        */
+
+
         private ApplicationDbContext db = new ApplicationDbContext();
 
         public ActionResult Index2()
@@ -865,7 +933,12 @@ namespace PwrConsFinal.Controllers
                     return View("ViewAll");
                 }
 
+       
+
+
         */
+
+
 
         private int ExecuteQuery(string sqlQuery)
         {
@@ -890,6 +963,73 @@ namespace PwrConsFinal.Controllers
             }
         }
 
+        /*
+         
+        public ActionResult ViewAll()
+        {
+            double[] samples = // Retrieve your double[] from the database based on the selected value from the dropdown list.  ;
+
+            int[] peaks = samples.FindPeaks(); // Call the FindPeaks extension method
+
+            // Pass the peaks array to the view
+            ViewBag.Peaks = peaks;
+
+            return View();
+        }
+
+        
+    }
+    
+        
+
+    
+
+    public static class PeakExtensions
+    {
+        public static int[] FindPeaks(this double[] samples)
+        {
+            var peaks = new List<int>();
+
+            for (int i = 1; i < samples.Length - 1; i++)
+            {
+                if (samples[i] > samples[i - 1] && samples[i] > samples[i + 1])
+                {
+                    bool isPeak = true;
+
+                    // Check if it's a peak based on your definition
+                    for (int j = i - 1; j >= 0; j--)
+                    {
+                        if (samples[j] >= samples[i])
+                        {
+                            isPeak = false;
+                            break;
+                        }
+                    }
+
+                    if (isPeak)
+                    {
+                        for (int j = i + 1; j < samples.Length; j++)
+                        {
+                            if (samples[j] >= samples[i])
+                            {
+                                isPeak = false;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (isPeak)
+                    {
+                        peaks.Add(i);
+                    }
+                }
+            }
+
+            return peaks.ToArray();
+        }
+    }
+
+     */
 
     }
 }

@@ -2,8 +2,28 @@
     ViewData["Title"] = "Consumption Summary";
 }
 
+<link rel="stylesheet" type="text/css" href="styles.css">
+
+
 <div align="center">
     <h1>Consumption Summary</h1>
+
+ @*    
+     //For the peak value
+
+    @model YourNamespace.PeakModel
+
+    <h1>Peak Values</h1>
+    <ul>
+        @foreach (var peakValue in Model.PeakValues)
+        {
+            <li>@peakValue</li>
+        }
+    </ul>
+
+ *@
+
+
 
     @using (Html.BeginForm("CalculateSum", "Home", FormMethod.Post))
     {
@@ -25,8 +45,30 @@
             <option value="QI_HOTPV">QI_HOTPV</option>
             <option value="QI_BP3PV">QI_BP3PV</option>
         </select>
-        <input type="submit" value="Calculate Sum" />
+        <input type="submit" value="Calculate Sum" class="button" />
     }
+
+    <br />
+    <br />
+    <br />
+
+    @{
+        var peaks = ViewBag.Peaks as int[];
+    }
+
+    <h2>Peak Values</h2>
+
+    @*
+
+    <ul>
+        @foreach (var peak in peaks)
+        {
+            <li>@samples[peak]</li>
+        }
+    </ul>
+
+    *@
+
 
     <br />
     <br />
@@ -152,7 +194,8 @@
         </table>
     }
 
-@* 
+@* Table time loop
+
     <div id="resultsTable">
         @if (ViewBag.Results != null)
         {
