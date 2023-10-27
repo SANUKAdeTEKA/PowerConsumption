@@ -1,17 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic.FileIO;
+using PowerConsumption.Models;
 using PwrConsFinal.Models;
 using System.Data;
-using System.Diagnostics;
-using Microsoft.AspNetCore.Http;
-using System;
 using System.Data.SqlClient;
-using Microsoft.VisualBasic;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-using System.Net;
-using PowerConsumption.Models;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using Microsoft.AspNetCore.Http.HttpResults;
+using System.Diagnostics;
 
 namespace PwrConsFinal.Controllers
 {
